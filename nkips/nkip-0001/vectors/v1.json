@@ -1,12 +1,12 @@
 {
-  "public_key_b64u": "lYs_9Dq-YMB7u77EdqknGLtd4vAub0jVDqM5bgffkvE",
-  "key_id": "6af03ea7ea39237e",
+  "public_key_b64u": "HaJVYrdjL9npQ6oqBOI7kasjRiRI0DCyNEzeEWd-bSM",
+  "key_id": "f1982d2c41e906f9",
   "policy_text": "Example refund policy v1: deposits within 1% of deposit_amount are honoured.\n",
   "vectors": [
     {
       "name": "valid",
       "receipt": {
-        "v": "sip01/1",
+        "v": "nkip01/1",
         "issuer": "example.swap",
         "order_id": "EX-0001",
         "deposit_asset": "XMR",
@@ -19,17 +19,17 @@
         "created_at": 1793000000,
         "expires_at": 1793001800,
         "policy_hash": "821df094624716488b10e5f2b844a4f2674ad37124dc792ad272b9b62606b9a7",
-        "key_id": "6af03ea7ea39237e",
-        "sig": "M6Fbvn40nOlf-sGITsUWPbGJrHfZSuAcAsNJg8Djoi5yO43xyaDCZhftEDPsFqutX3GsjguGxnAuU5bezkSNBQ"
+        "key_id": "f1982d2c41e906f9",
+        "sig": "jCpa3ZBpTEMCuDqdT4w4GBRe65Zz7qL_3_Xqr0dO3OOqIueU1dw4lAoBpVuVyXoF_sIwbF5qOmJaaraWQdYMBw"
       },
-      "jcs_without_sig": "{\"created_at\":1793000000,\"deposit_address\":\"84ExampleXmrDepositAddress0001\",\"deposit_amount\":\"1500000000000\",\"deposit_asset\":\"XMR\",\"expires_at\":1793001800,\"issuer\":\"example.swap\",\"key_id\":\"6af03ea7ea39237e\",\"order_id\":\"EX-0001\",\"payout_address\":\"bc1qexamplepayoutaddress0001\",\"payout_amount\":\"820000\",\"payout_asset\":\"BTC\",\"policy_hash\":\"821df094624716488b10e5f2b844a4f2674ad37124dc792ad272b9b62606b9a7\",\"rate_type\":\"fixed\",\"v\":\"sip01/1\"}",
+      "jcs_without_sig": "{\"created_at\":1793000000,\"deposit_address\":\"84ExampleXmrDepositAddress0001\",\"deposit_amount\":\"1500000000000\",\"deposit_asset\":\"XMR\",\"expires_at\":1793001800,\"issuer\":\"example.swap\",\"key_id\":\"f1982d2c41e906f9\",\"order_id\":\"EX-0001\",\"payout_address\":\"bc1qexamplepayoutaddress0001\",\"payout_amount\":\"820000\",\"payout_asset\":\"BTC\",\"policy_hash\":\"821df094624716488b10e5f2b844a4f2674ad37124dc792ad272b9b62606b9a7\",\"rate_type\":\"fixed\",\"v\":\"nkip01/1\"}",
       "valid": true,
-      "commitment": "a502d42809baab1a05c9e187585838724a352fe2fa3e6f3aa89386fb60fca9a0"
+      "commitment": "3d8019e0f9d40afaa4490aa841f858b67ed6162c3008eb88257faa050e09dc76"
     },
     {
       "name": "tampered-payout",
       "receipt": {
-        "v": "sip01/1",
+        "v": "nkip01/1",
         "issuer": "example.swap",
         "order_id": "EX-0001",
         "deposit_asset": "XMR",
@@ -42,8 +42,8 @@
         "created_at": 1793000000,
         "expires_at": 1793001800,
         "policy_hash": "821df094624716488b10e5f2b844a4f2674ad37124dc792ad272b9b62606b9a7",
-        "key_id": "6af03ea7ea39237e",
-        "sig": "M6Fbvn40nOlf-sGITsUWPbGJrHfZSuAcAsNJg8Djoi5yO43xyaDCZhftEDPsFqutX3GsjguGxnAuU5bezkSNBQ"
+        "key_id": "f1982d2c41e906f9",
+        "sig": "jCpa3ZBpTEMCuDqdT4w4GBRe65Zz7qL_3_Xqr0dO3OOqIueU1dw4lAoBpVuVyXoF_sIwbF5qOmJaaraWQdYMBw"
       },
       "valid": false
     }

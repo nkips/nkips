@@ -8,4 +8,4 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - run: pip install pynacl
-      - run: python3 tools/sip0001.py check sips/sip-0001/vectors/v1.json
+      - run: python3 tools/nkip0001.py check nkips/nkip-0001/vectors/v1.json

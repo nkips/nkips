@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "sip-0001/receipt.schema.json",
-  "title": "SIP-0001 deposit receipt (v1, draft)",
+  "$id": "nkip-0001/receipt.schema.json",
+  "title": "NKIP-0001 deposit receipt (v1, draft)",
   "type": "object",
   "additionalProperties": false,
   "required": ["v","issuer","order_id","deposit_asset","deposit_address","deposit_amount","payout_asset","payout_address","payout_amount","rate_type","created_at","expires_at","policy_hash","key_id","sig"],
   "properties": {
-    "v": {"const": "sip01/1"},
+    "v": {"const": "nkip01/1"},
     "issuer": {"type": "string", "pattern": "^[a-z0-9.-]+\\.[a-z]{2,}$"},
     "order_id": {"type": "string", "minLength": 1, "maxLength": 128},
     "deposit_asset": {"type": "string", "minLength": 1, "maxLength": 32},
