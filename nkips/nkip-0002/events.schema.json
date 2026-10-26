@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "nkip-0002/events.schema.json",
+  "title": "NKIP-0002 receipt (9042) and confirmation (9044) events (v1, draft)",
+  "$defs": {
+    "hex64": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "xmr": {"type": "string", "pattern": "^[0-9]+(\\.[0-9]{1,12})?$"},
+    "forbiddenTag": {
+      "not": {"type": "array", "prefixItems": [{"type": "string", "pattern": "^([Tt][Xx]([_-]?([Ii][Dd]|[Kk][Ee][Yy]|[Hh][Aa][Ss][Hh]))?|[Pp][Rr][Oo][Oo][Ff]|[Pp][Aa][Yy][Mm][Ee][Nn][Tt][_-]?[Ii][Dd])$"}]}
+    }
+  },
+  "oneOf": [
+    {
+      "title": "Receipt",
+      "type": "object",
+      "required": ["kind", "pubkey", "created_at", "tags", "content", "id", "sig"],
+      "properties": {
+        "kind": {"const": 9042},
+        "tags": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/forbiddenTag"},
+          "allOf": [
+            {"contains": {"type": "array", "prefixItems": [{"const": "p"}, {"$ref": "#/$defs/hex64"}]}},
+            {"contains": {"type": "array", "prefixItems": [{"const": "amount"}, {"$ref": "#/$defs/xmr"}]}},
+            {"contains": {"type": "array", "prefixItems": [{"const": "unit"}, {"const": "xmr"}]}},
+            {"contains": {"type": "array", "prefixItems": [{"const": "address"}, {"type": "string", "pattern": "^[1-9A-HJ-NP-Za-km-z]{95}$"}]}}
+          ]
+        }
+      }
+    },
+    {
+      "title": "Confirmation",
+      "type": "object",
+      "required": ["kind", "pubkey", "created_at", "tags", "content", "id", "sig"],
+      "properties": {
+        "kind": {"const": 9044},
+        "content": {"const": ""},
+        "tags": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/forbiddenTag"},
+          "allOf": [
+            {"contains": {"type": "array", "prefixItems": [{"const": "e"}, {"$ref": "#/$defs/hex64"}]}},
+            {"contains": {"type": "array", "prefixItems": [{"const": "p"}, {"$ref": "#/$defs/hex64"}]}},
+            {"contains": {"type": "array", "prefixItems": [{"const": "amount"}, {"$ref": "#/$defs/xmr"}]}},
+            {"contains": {"type": "array", "prefixItems": [{"const": "method"}, {"enum": ["tx-proof", "wallet-match"]}]}},
+            {"contains": {"type": "array", "prefixItems": [{"const": "t"}, {"$ref": "#/$defs/hex64"}]}},
+            {"contains": {"type": "array", "prefixItems": [{"const": "v"}, {"const": "nkip02/1"}]}}
+          ]
+        }
+      }
+    }
+  ]
+}

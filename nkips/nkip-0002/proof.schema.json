@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "nkip-0002/proof.schema.json",
+  "title": "NKIP-0002 payment proof, decrypted kind 9043 rumor content (v1, draft)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "v",
+    "receipt",
+    "txid",
+    "address",
+    "proof"
+  ],
+  "properties": {
+    "v": {
+      "const": "nkip02/1"
+    },
+    "receipt": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "txid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "address": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{95}$"
+    },
+    "proof": {
+      "type": "string",
+      "pattern": "^OutProofV[12][1-9A-HJ-NP-Za-km-z]+$",
+      "maxLength": 4096
+    }
+  }
+}

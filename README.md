@@ -1,12 +1,13 @@
 # No-KYC Improvement Proposals (NKIPs)
 
 Open, vendor-neutral proposals for making no-KYC crypto swaps verifiable for
-their users. Anyone (exchanges, aggregators, directories, wallet and
+their users, from swaps to tips. Anyone (exchanges, aggregators, directories, wallet and
 extension authors) can propose, review and implement.
 
 | # | Title | Status |
 | --- | --- | --- |
 | [0001](nkips/nkip-0001.md) | Verifiable Deposit Receipts | Draft |
+| [0002](nkips/nkip-0002.md) | Verifiable Monero Tips on Nostr | Draft |
 
 ## Process
 

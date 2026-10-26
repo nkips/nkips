@@ -69,7 +69,7 @@ def build():
         (DIST / slug / "index.html").write_text(page(f"NKIP-{num:04d}: {title}", art, re.sub('<[^>]+>', '', render(lead)[0])[:200], f"/{slug}/"))
         rows.append(f'<tr><td class="n"><a href="/{slug}/">{num:04d}</a></td><td><a href="/{slug}/">{html.escape(title)}</a></td><td>{html.escape(meta.get("Type",""))}</td><td><span class="status s-{meta.get("Status","").lower()}">{html.escape(meta.get("Status",""))}</span></td><td>{html.escape(meta.get("Created",""))}</td></tr>')
     index = f"""<section class="hero"><h1>No-KYC Improvement Proposals</h1>
-<p class="lede">Open standards that let users of no-KYC swaps and services check what they were promised, without trusting the operator and without giving up their privacy.</p>
+<p class="lede">Open standards that let users of no-KYC swaps, services and tips check what they were promised, without trusting the operator and without giving up their privacy.</p>
 <p>Anyone can propose, review or implement an NKIP: exchanges, aggregators, directories, wallet and extension authors. Proposals are vendor-neutral, ship with schemas and test vectors, and are dedicated to the public domain.</p></section>
 <h2 class="sec">Proposals</h2>
 <table class="index"><thead><tr><th>#</th><th>Title</th><th>Type</th><th>Status</th><th>Created</th></tr></thead><tbody>{''.join(rows)}</tbody></table>
