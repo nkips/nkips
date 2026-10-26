@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "nkip-0001/manifest.schema.json",
+  "title": "NKIP-0001 issuer manifest (/.well-known/nkip01.json)",
+  "type": "object",
+  "required": ["v", "issuer", "adopted_at", "keys", "nostr_pubkey", "relays", "policies", "disputes"],
+  "properties": {
+    "v": {"const": "nkip01/1"},
+    "issuer": {"type": "string", "pattern": "^[a-z0-9.-]+\\.[a-z]{2,}$"},
+    "adopted_at": {"type": "integer", "minimum": 0},
+    "keys": {"type": "array", "minItems": 1, "items": {
+      "type": "object", "additionalProperties": false,
+      "required": ["key_id", "alg", "public_key", "not_before", "revoked_at", "rotated_from", "rotation_sig"],
+      "properties": {
+        "key_id": {"type": "string", "pattern": "^[0-9a-f]{16}$"},
+        "alg": {"const": "ed25519"},
+        "public_key": {"type": "string", "pattern": "^[A-Za-z0-9_-]{43}$"},
+        "not_before": {"type": "integer", "minimum": 0},
+        "revoked_at": {"type": ["integer", "null"]},
+        "rotated_from": {"type": ["string", "null"], "pattern": "^[0-9a-f]{16}$"},
+        "rotation_sig": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9_-]{86}$"}
+      }}},
+    "nostr_pubkey": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "relays": {"type": "array", "minItems": 3, "items": {"type": "string", "pattern": "^wss://"}},
+    "policies": {"type": "array", "minItems": 1, "items": {
+      "type": "object", "required": ["policy_hash", "url"],
+      "properties": {"policy_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "url": {"type": "string", "pattern": "^https://"}}}},
+    "disputes": {"type": "object", "minProperties": 1,
+      "properties": {"email": {"type": "string"}, "nostr": {"type": "string"}}}
+  }
+}

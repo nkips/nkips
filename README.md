@@ -15,6 +15,10 @@ extension authors) can propose, review and implement.
 3. Status moves Draft → Proposed (one reference implementation) → Final (two independent implementations). Final specs only get errata; changes go in a new NKIP.
 4. Each Standards Track NKIP ships a schema and test vectors, checked in CI.
 
+## Site
+
+`python3 tools/build_site.py` builds nkips.org into `dist/`; `npx wrangler deploy` publishes it (Worker static assets).
+
 ## Tools
 
 `python3 tools/nkip0001.py check nkips/nkip-0001/vectors/v1.json` checks the NKIP-0001 vectors (needs `pynacl`).

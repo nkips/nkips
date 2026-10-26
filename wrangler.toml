@@ -1,0 +1,11 @@
+name = "nkips-site"
+compatibility_date = "2026-10-01"
+routes = [
+  { pattern = "nkips.org", custom_domain = true },
+  { pattern = "www.nkips.org", custom_domain = true }
+]
+
+[assets]
+directory = "./dist"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"

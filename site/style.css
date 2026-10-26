@@ -1,0 +1,53 @@
+:root{--paper:#f6efd9;--sheet:#fbf6e6;--ink:#2b2418;--muted:#6f6350;--rule:#d9cba4;--accent:#8a3b12;--code:#efe5c8;--draft:#a86b00;--final:#2f6b2f;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--paper:#1b1813;--sheet:#221e17;--ink:#e9e0c9;--muted:#a89a7d;--rule:#3d3527;--accent:#e0915c;--code:#2c261c;--draft:#e0a63a;--final:#7fbf7f;color-scheme:dark}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.62 "Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;font-variant-numeric:oldstyle-nums}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+.mast{display:flex;justify-content:space-between;align-items:baseline;max-width:820px;margin:0 auto;padding:22px 20px 10px;border-bottom:1px solid var(--rule)}
+.brand{font-variant:small-caps;letter-spacing:.08em;font-size:1.25rem;color:var(--ink);text-decoration:none;font-weight:600}
+.mast nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-variant:small-caps;letter-spacing:.05em}
+.mast nav a:hover{color:var(--accent)}
+main{max-width:820px;margin:0 auto;padding:8px 20px 40px}
+footer{max-width:820px;margin:0 auto;padding:18px 20px 40px;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+h1,h2,h3{font-weight:600;line-height:1.25}
+.hero h1{font-size:2.1rem;margin:28px 0 8px}
+.lede{font-size:1.15rem;font-style:italic;color:var(--muted)}
+.sec{font-variant:small-caps;letter-spacing:.06em;font-size:1.05rem;border-bottom:1px solid var(--rule);padding-bottom:4px;margin-top:36px}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:14px 0;display:block;overflow-x:auto}
+th,td{text-align:left;vertical-align:top;padding:6px 10px;border-bottom:1px solid var(--rule)}
+thead th,.preamble th{font-variant:small-caps;letter-spacing:.04em;color:var(--muted);font-weight:600}
+table.index{display:table}
+.index .n{font-family:ui-monospace,Menlo,Consolas,monospace}
+.status{font-variant:small-caps;letter-spacing:.05em}
+.s-draft{color:var(--draft)}.s-final{color:var(--final)}
+.principles li{margin:6px 0}
+.paper{background:var(--sheet);border:1px solid var(--rule);box-shadow:0 1px 0 var(--rule),0 12px 30px -22px rgba(60,40,10,.45);padding:34px 44px 30px;margin:24px 0}
+.kicker{font-variant:small-caps;letter-spacing:.1em;color:var(--muted);margin:0;text-align:center}
+.paper>h1{text-align:center;font-size:1.9rem;margin:6px 0 18px}
+.abstract{margin:0 auto 18px;max-width:640px;font-size:.95rem;text-align:justify;hyphens:auto}
+.abstract span{font-variant:small-caps;font-weight:600;letter-spacing:.05em}
+.preamble{max-width:420px;margin:0 auto 10px;display:table;font-size:.82rem}
+.preamble th{width:40%}
+.files{text-align:center;font-size:.82rem;color:var(--muted)}
+.toc{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:18px 0 8px;padding:6px 0;font-size:.88rem}
+.toc summary{cursor:pointer;font-variant:small-caps;letter-spacing:.06em;color:var(--muted)}
+.toc ul{list-style:none;padding-left:16px;margin:6px 0}
+.toc>div>ul{counter-reset:t2;padding-left:0}
+.toc>div>ul>li{counter-increment:t2;counter-reset:t3}
+.toc>div>ul>li>a::before{content:counter(t2) ". ";color:var(--muted)}
+.toc>div>ul>li>ul>li{counter-increment:t3}
+.toc>div>ul>li>ul>li>a::before{content:counter(t2) "." counter(t3) " ";color:var(--muted)}
+.numbered{counter-reset:h2}
+.numbered h2{counter-increment:h2;counter-reset:h3;font-size:1.3rem;margin-top:34px}
+.numbered h2::before{content:counter(h2) ". ";color:var(--muted)}
+.numbered h3{counter-increment:h3;font-size:1.08rem;margin-top:26px;font-style:italic}
+.numbered h3::before{content:counter(h2) "." counter(h3) " ";color:var(--muted);font-style:normal}
+.numbered p{text-align:justify;hyphens:auto}
+code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.84em;background:var(--code);padding:1px 4px;border-radius:3px;word-break:break-word}
+pre{background:var(--code);padding:12px 14px;overflow-x:auto;border-left:3px solid var(--rule);font-size:.86rem;line-height:1.45}
+pre code{background:none;padding:0;word-break:normal}
+li.task{list-style:"☐  "}
+.source{text-align:right;font-size:.8rem;margin-top:28px}
+@media (max-width:640px){body{font-size:16px}.paper{padding:22px 16px;margin:14px -4px}.mast{padding:16px}main,footer{padding-left:16px;padding-right:16px}.hero h1{font-size:1.7rem}.numbered p,.abstract{text-align:left}}
+@media print{body{background:#fff}.mast,footer,.toc summary{display:none}.paper{border:0;box-shadow:none;padding:0}}
