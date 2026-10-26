@@ -17,9 +17,9 @@ def page(title, body, desc, path):
 <link rel="canonical" href="https://nkips.org{path}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23f6efd9'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' text-anchor='middle' fill='%232b2418'%3EN%3C/text%3E%3C/svg%3E">
 <style>{CSS}</style></head>
-<body><header class="mast"><a class="brand" href="/">NKIPs</a><nav><a href="/">Proposals</a><a href="/process/">Process</a><a href="https://github.com/xbtoshi/nkips">Source</a></nav></header>
+<body><header class="mast"><a class="brand" href="/">NKIPs</a><nav><a href="/">Proposals</a><a href="/process/">Process</a><a href="https://github.com/nkips/nkips">Source</a></nav></header>
 <main>{body}</main>
-<footer><p>NKIPs are dedicated to the public domain (CC0). Anyone may implement them without permission. Discuss or propose changes on <a href="https://github.com/xbtoshi/nkips/issues">GitHub</a>.</p></footer>
+<footer><p>NKIPs are dedicated to the public domain (CC0). Anyone may implement them without permission. Discuss or propose changes on <a href="https://github.com/nkips/nkips/issues">GitHub</a>.</p></footer>
 </body></html>"""
 
 def parse_preamble(md):
@@ -64,7 +64,7 @@ def build():
 {files}
 <details class="toc" open><summary>Contents</summary>{toc}</details>
 <div class="numbered">{body_html}</div>
-<p class="source"><a href="index.md">Markdown source</a> · <a href="https://github.com/xbtoshi/nkips/blob/main/nkips/{slug}.md">History</a> · <a href="https://github.com/xbtoshi/nkips/issues/new?title={slug}%3A%20">Comment</a></p>
+<p class="source"><a href="index.md">Markdown source</a> · <a href="https://github.com/nkips/nkips/blob/main/nkips/{slug}.md">History</a> · <a href="https://github.com/nkips/nkips/issues/new?title={slug}%3A%20">Comment</a></p>
 </article>"""
         (DIST / slug / "index.html").write_text(page(f"NKIP-{num:04d}: {title}", art, re.sub('<[^>]+>', '', render(lead)[0])[:200], f"/{slug}/"))
         rows.append(f'<tr><td class="n"><a href="/{slug}/">{num:04d}</a></td><td><a href="/{slug}/">{html.escape(title)}</a></td><td>{html.escape(meta.get("Type",""))}</td><td><span class="status s-{meta.get("Status","").lower()}">{html.escape(meta.get("Status",""))}</span></td><td>{html.escape(meta.get("Created",""))}</td></tr>')
