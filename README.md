@@ -9,6 +9,10 @@ extension authors) can propose, review and implement.
 | [0001](nkips/nkip-0001.md) | Verifiable Deposit Receipts | Draft |
 | [0002](nkips/nkip-0002.md) | Verifiable Monero Tips on Nostr | Draft |
 
+## Discussion
+
+Open an issue for questions, objections or implementation reports on any NKIP. Security problems in a spec can be reported the same way; there is no private code here to protect.
+
 ## Process
 
 1. Open an issue describing the problem first.
