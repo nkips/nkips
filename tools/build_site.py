@@ -29,6 +29,7 @@ def page(title, body, desc, path, og="index"):
 <body><header class="mast"><a class="brand" href="/">NKIPs</a><nav><a href="/">Proposals</a><a href="/process/">Process</a><a href="https://github.com/nkips/nkips">Source</a></nav></header>
 <main>{body}</main>
 <footer><p>NKIPs are dedicated to the public domain (CC0). Anyone may implement them without permission. Discuss or propose changes on <a href="https://github.com/nkips/nkips/issues">GitHub</a>.</p></footer>
+<script src="/copy.js" defer></script>
 </body></html>"""
 
 def parse_preamble(md):
@@ -38,9 +39,11 @@ def parse_preamble(md):
 
 def render(md):
     conv = markdown.Markdown(extensions=["tables", "fenced_code", "toc", "sane_lists"],
-                             extension_configs={"toc": {"toc_depth": "2-3", "permalink": False}})
+                             extension_configs={"toc": {"toc_depth": "2-3", "permalink": "#", "permalink_class": "anchor", "permalink_title": "Copy link to this section"}})
     out = conv.convert(md)
     out = out.replace("<li>[ ] ", '<li class="task">')
+    # Requirement ids (R1, R12, ...) in the first column of a table get their own anchor.
+    out = re.sub(r"<tr>\n<td>(R\d{1,3})</td>", lambda m: f'<tr id="{m.group(1).lower()}">\n<td><a class="anchor req" href="#{m.group(1).lower()}" title="Copy link to {m.group(1)}">{m.group(1)}</a></td>', out)
     return out, conv.toc
 
 def build():
@@ -96,11 +99,12 @@ def build():
     (DIST / "process").mkdir()
     (DIST / "process" / "index.html").write_text(page("Process · NKIPs", f'<article class="paper"><h1>Process</h1>{render(proc_md)[0]}<h2>Statuses</h2><table><tr><th>Draft</th><td>Open for comment; anything can change.</td></tr><tr><th>Proposed</th><td>One reference implementation exists.</td></tr><tr><th>Final</th><td>Two independent implementations interoperate. Errata only.</td></tr><tr><th>Withdrawn</th><td>Abandoned by its authors.</td></tr></table></article>', "How NKIPs are proposed, reviewed and finalised.", "/process/"))
     shutil.copy(ROOT / "site" / "404.html", DIST / "404.html")
+    shutil.copy(ROOT / "site" / "copy.js", DIST / "copy.js")
     shutil.copytree(ROOT / "site" / "og", DIST / "og")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://nkips.org/sitemap.xml\n")
     urls = ["/", "/process/"] + [f"/{f.stem}/" for f in sorted(SRC.glob('nkip-*.md'))]
     (DIST / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>https://nkips.org{u}</loc></url>" for u in urls) + "</urlset>")
-    (DIST / "_headers").write_text("/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'\n/*.json\n  Access-Control-Allow-Origin: *\n")
+    (DIST / "_headers").write_text("/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'\n/*.json\n  Access-Control-Allow-Origin: *\n")
     print("built", len(urls), "pages")
 
 if __name__ == "__main__": build()
