@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nkips.org/nkip-0001/order-status.schema.json",
+  "title": "NKIP-0001 order response: deposit address held back until witnessed",
+  "description": "relays_ok >= required for an accepted nostr witness is checked outside the schema (JSON Schema can't compare two fields).",
+  "type": "object",
+  "required": [
+    "id",
+    "deposit_address",
+    "receipt",
+    "witness"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deposit_address": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receipt": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "receipt.schema.json"
+        }
+      ]
+    },
+    "witness": {
+      "type": "object",
+      "required": [
+        "state",
+        "via",
+        "required"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": [
+            "pending",
+            "accepted",
+            "failed"
+          ]
+        },
+        "via": {
+          "enum": [
+            "nostr",
+            "aggregator"
+          ]
+        },
+        "event_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "commitment": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "relays_ok": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "required": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "acceptance": {
+          "type": "object",
+          "required": [
+            "commitment",
+            "key_id",
+            "sig"
+          ],
+          "properties": {
+            "commitment": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "key_id": {
+              "type": "string"
+            },
+            "sig": {
+              "type": "string"
+            }
+          },
+          "description": "The aggregator's signature over the commitment, checked against the aggregator's own published key."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "via": {
+                "const": "nostr"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "event_id",
+              "commitment",
+              "relays_ok"
+            ],
+            "properties": {
+              "required": {
+                "minimum": 2
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "via": {
+                "const": "aggregator"
+              },
+              "state": {
+                "const": "accepted"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "commitment",
+              "acceptance"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "witness": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "pending",
+                  "failed"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "deposit_address": {
+            "const": null
+          },
+          "receipt": {
+            "const": null
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "witness": {
+            "properties": {
+              "state": {
+                "const": "accepted"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "deposit_address": {
+            "type": "string"
+          },
+          "receipt": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ]
+}
