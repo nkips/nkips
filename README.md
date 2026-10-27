@@ -12,7 +12,7 @@ extension authors) can propose, review and implement.
 
 ## About
 
-NKIPs grew out of the authors' work on kyc.rip, xmr.club and RipleyOS. They're
+NKIPs grew out of the authors' work on kyc.rip, xmr.club and Ripley Terminal. They're
 open to everyone, and no NKIP depends on those services: every role can be run
 by anyone, and a proposal becomes Final only with two independent
 implementations. Each NKIP lists known implementations, with the authors' own
