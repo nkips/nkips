@@ -9,6 +9,9 @@ extension authors) can propose, review and implement.
 | [0001](nkips/nkip-0001.md) | Verifiable Deposit Receipts | Draft |
 | [0002](nkips/nkip-0002.md) | Verifiable Monero Tips on Nostr | Draft |
 | [0003](nkips/nkip-0003.md) | Sign-In with Monero | Draft |
+| [0004](nkips/nkip-0004.md) | Signed JSON Objects over Nostr Events | Draft |
+| [0005](nkips/nkip-0005.md) | Cashtags on Nostr | Draft |
+| [0006](nkips/nkip-0006.md) | PGP Chat over Nostr | Draft |
 
 ## About
 
@@ -41,6 +44,7 @@ Open an issue for questions, objections or implementation reports on any NKIP. S
 
 `python3 tools/nkip0001.py check nkips/nkip-0001/vectors/v1.json` checks the NKIP-0001 vectors (needs `pynacl`).
 `python3 tools/nkip0003.py check nkips/nkip-0003/vectors/v1.json` checks the NKIP-0003 vectors (needs `pycryptodome`).
+`python3 tools/nkip0004.py check nkips/nkip-0004/vectors/v1.json`, `tools/nkip0005.py` and `tools/nkip0006.py` check theirs the same way (standard library only).
 
 ## License
 

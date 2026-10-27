@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nkips.org/nkip-0004/envelope.schema.json",
+  "title": "NKIP-0004 signed object envelope v1",
+  "description": "Shape only. This schema checks the top level of the payload (no member named \"signature\" or \"manifest\") but cannot enforce the ban on a member named \"signature\" at deeper levels, I-JSON (duplicates, lone surrogates, unsafe integers) or the signature itself; tools/nkip0004.py and the spec do.",
+  "type": "object",
+  "required": ["manifest"],
+  "additionalProperties": false,
+  "properties": {
+    "manifest": {
+      "type": "object",
+      "not": { "anyOf": [{ "required": ["signature"] }, { "required": ["manifest"] }] }
+    },
+    "signature": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["alg", "pubkey", "created_at", "sig"],
+          "additionalProperties": false,
+          "properties": {
+            "alg": { "const": "nostr-schnorr" },
+            "pubkey": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+            "created_at": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+            "sig": { "type": "string", "pattern": "^[0-9a-f]{128}$" }
+          }
+        }
+      ]
+    }
+  }
+}

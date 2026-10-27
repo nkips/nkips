@@ -1,0 +1,1068 @@
+{
+  "nkip": 6,
+  "version": "2",
+  "note": "TEST KEYS ONLY: their private keys are published here. These are shape and protocol-decision vectors, not end-to-end crypto tests: the checker parses OpenPGP armor and packet headers but never decrypts or verifies a signature (receive cases give the signer as a fingerprint). The v2 example was decrypted and its signature verified once with openpgp.js 6.3.1. Nostr events are shown without id and sig.",
+  "test_keys": {
+    "alice": {
+      "fingerprint": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+      "public": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBtI2iofIFY8MUsyFnZLVHl1X6gW9LcV5drbAYpmrj26g80aQWxp\nY2UgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRAq\nZVR8DOfTXkUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\nZ0nznO5Cfqh19UzsDUwwyXPGCAfInNpjoadSpeIwcVwFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBJIODmT3flb9LY77RCplVHwM59NeAAAKhVKgEU2hc6UHikWw\nZTE7S7nhwK5Olxyj/aCxOWIhNNjKn9JfT3iISIxFLPEj+PXv6AqZ7AQgaRhR\ne9c2VBphDQvOJgRq3+mAGTUxwxROU8pRCBJ2WY924BhouWxscYuqlloCbqj5\nkW53wroEGBsKAHAFgmrf6YAJECplVHwM59NeRRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmcK6TEGydZK67BdM+tViCZny3omQP1gp5WQ\n7XllzRsDoAKbDBYhBJIODmT3flb9LY77RCplVHwM59NeAABtbb/+8WdDqZ1A\n/NRDOqRYwpUcrpx2LtDRsQkgrtNKLjqRneVYXy1Yfd5stl6+QiK8fW9M2C8D\ngZfnZU87JA22Kg8=\n=svM+\n-----END PGP PUBLIC KEY BLOCK-----\n",
+      "private": "-----BEGIN PGP PRIVATE KEY BLOCK-----\n\nxUkEat/pgBtI2iofIFY8MUsyFnZLVHl1X6gW9LcV5drbAYpmrj26gwBJQjY8\nzVurURWUqsSofVrhqNZkyyqDP5oBeHwWdiHBUA5+zRpBbGljZSAoTktJUC0w\nMDA2IFRFU1QgS0VZKcLADwQTGwoAhQWCat/pgAMLCQcJECplVHwM59NeRRQA\nAAAAABwAIHNhbHRAbm90YXRpb25zLm9wZW5wZ3Bqcy5vcmdnSfOc7kJ+qHX1\nTOwNTDDJc8YIB8ic2mOhp1Kl4jBxXAUVCggODAQWAAIBAhkBApsDAh4BFiEE\nkg4OZPd+Vv0tjvtEKmVUfAzn014AAAqFUqARTaFzpQeKRbBlMTtLueHArk6X\nHKP9oLE5YiE02Mqf0l9PeIhIjEUs8SP49e/oCpnsBCBpGFF71zZUGmENC8dJ\nBGrf6YAZNTHDFE5TylEIEnZZj3bgGGi5bGxxi6qWWgJuqPmRbncAcLcwUTGR\nsqtMncGOrJwvtzNI9A9Hvq7Eeto47v2d9WwRl8K6BBgbCgBwBYJq3+mACRAq\nZVR8DOfTXkUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\nCukxBsnWSuuwXTPrVYgmZ8t6JkD9YKeVkO15Zc0bA6ACmwwWIQSSDg5k935W\n/S2O+0QqZVR8DOfTXgAAbW2//vFnQ6mdQPzUQzqkWMKVHK6cdi7Q0bEJIK7T\nSi46kZ3lWF8tWH3ebLZevkIivH1vTNgvA4GX52VPOyQNtioP\n=SVln\n-----END PGP PRIVATE KEY BLOCK-----\n"
+    },
+    "bob": {
+      "fingerprint": "E9FFFFFE74F75EF516117895434F109B156446D5",
+      "public": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBs3nFjhfZcP/eTbqbcrYzQdDv1dnLpZiqf+ALgqDc7hQc0YQm9i\nIChOS0lQLTAwMDYgVEVTVCBLRVkpwsAPBBMbCgCFBYJq3+mAAwsJBwkQQ08Q\nmxVkRtVFFAAAAAAAHAAgc2FsdEBub3RhdGlvbnMub3BlbnBncGpzLm9yZ/X7\nksHf/qIC/5E8VbYsQ5wMePaZ1bX5M5xAW2rqx33lBRUKCA4MBBYAAgECGQEC\nmwMCHgEWIQTp///+dPde9RYReJVDTxCbFWRG1QAANwfJAMwSZ/2++dLOZvMs\nLtu1EAVZrE24DlYYpvmd1GFEK6IG+lok8+8UqZHN29L1jbeQadP1ylH4HMqH\n42C9yfIMziYEat/pgBm3mFGGQr3AaX3IYRaDxnj/poIuhd2TBAoolSVwMiw5\nLsK6BBgbCgBwBYJq3+mACRBDTxCbFWRG1UUUAAAAAAAcACBzYWx0QG5vdGF0\naW9ucy5vcGVucGdwanMub3JnLKM4ulC4Q7PCw1qf6HcxQzjCgBhp6m7Bu96Q\n3uLZVzECmwwWIQTp///+dPde9RYReJVDTxCbFWRG1QAAdRpMPm5SyTsVYmAq\n4XMGMUyljriPyd4PD9f7vofeoi78iY+h8VYe4fvluydRT8rpYi2Av40kfY0r\ntsUJ+snyL8UG\n=tb3v\n-----END PGP PUBLIC KEY BLOCK-----\n",
+      "private": "-----BEGIN PGP PRIVATE KEY BLOCK-----\n\nxUkEat/pgBs3nFjhfZcP/eTbqbcrYzQdDv1dnLpZiqf+ALgqDc7hQQC9xk/n\nPsI832tXwrTzq8CH4Iovx0/ab17zcV5I2aYJMRIKzRhCb2IgKE5LSVAtMDAw\nNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRBDTxCbFWRG1UUUAAAA\nAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn9fuSwd/+ogL/kTxV\ntixDnAx49pnVtfkznEBbaurHfeUFFQoIDgwEFgACAQIZAQKbAwIeARYhBOn/\n//509171FhF4lUNPEJsVZEbVAAA3B8kAzBJn/b750s5m8ywu27UQBVmsTbgO\nVhim+Z3UYUQrogb6WiTz7xSpkc3b0vWNt5Bp0/XKUfgcyofjYL3J8gzHSQRq\n3+mAGbeYUYZCvcBpfchhFoPGeP+mgi6F3ZMECiiVJXAyLDkuAKiz02VdR7YB\nXFfY6wFJQZPY/rVdWhY04Z3PlUzpmX5zEK/CugQYGwoAcAWCat/pgAkQQ08Q\nmxVkRtVFFAAAAAAAHAAgc2FsdEBub3RhdGlvbnMub3BlbnBncGpzLm9yZyyj\nOLpQuEOzwsNan+h3MUM4woAYaepuwbvekN7i2VcxApsMFiEE6f///nT3XvUW\nEXiVQ08QmxVkRtUAAHUaTD5uUsk7FWJgKuFzBjFMpY64j8neDw/X+76H3qIu\n/ImPofFWHuH75bsnUU/K6WItgL+NJH2NK7bFCfrJ8i/FBg==\n=ruug\n-----END PGP PRIVATE KEY BLOCK-----\n"
+    },
+    "carol": {
+      "fingerprint": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+      "public": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBv93ZdnHpNLIwN6dslYpSytd98zpJBmfuPQd1bb7Lknsc0aQ2Fy\nb2wgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRB9\nZgN/iO+YdUUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\n9NxWWVWAXFppa3xcDrwPavIC7FCV4Fx0t36sehG+VnQFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBFoKdsacQlfVpx0RUH1mA3+I75h1AACrIr/w7RcvelycCz12\n4V5LiCSve6uMz9z8kBvYGlzPLrokZigqjTurRznnanXyxLpSAnSTeuS5a7l/\ndjeULwaP+wnOJgRq3+mAGTz2O3b/ZfS1RziLs+z0os3sNP7a9CwrRRclchFA\nc29cwroEGBsKAHAFgmrf6YAJEH1mA3+I75h1RRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmdroWn2uTbgJPWK9EGBSO/qPQXuvEf+wbpi\nj6tJW9oxJAKbDBYhBFoKdsacQlfVpx0RUH1mA3+I75h1AAD1PMYRkVM2A/UX\nSqDbajjrdouVHVq/c1JQFKtm/jGWkqlbmf3bgJhjQlENWhV9pbshuX8+XwO6\nb5QAsyvTHoKN+Ak=\n=iBga\n-----END PGP PUBLIC KEY BLOCK-----\n",
+      "private": "-----BEGIN PGP PRIVATE KEY BLOCK-----\n\nxUkEat/pgBv93ZdnHpNLIwN6dslYpSytd98zpJBmfuPQd1bb7LknsQDtuP2P\nlaAXLkUKvDQnTc5qjoCcUFqk/Y2BFzlUQDfWmg8kzRpDYXJvbCAoTktJUC0w\nMDA2IFRFU1QgS0VZKcLADwQTGwoAhQWCat/pgAMLCQcJEH1mA3+I75h1RRQA\nAAAAABwAIHNhbHRAbm90YXRpb25zLm9wZW5wZ3Bqcy5vcmf03FZZVYBcWmlr\nfFwOvA9q8gLsUJXgXHS3fqx6Eb5WdAUVCggODAQWAAIBAhkBApsDAh4BFiEE\nWgp2xpxCV9WnHRFQfWYDf4jvmHUAAKsiv/DtFy96XJwLPXbhXkuIJK97q4zP\n3PyQG9gaXM8uuiRmKCqNO6tHOedqdfLEulICdJN65LlruX92N5QvBo/7CcdJ\nBGrf6YAZPPY7dv9l9LVHOIuz7PSizew0/tr0LCtFFyVyEUBzb1wAuBNIYHm4\ncpFHvMdAA5aSibXpoUXT+CeDRYQhqVisgm8P5sK6BBgbCgBwBYJq3+mACRB9\nZgN/iO+YdUUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\na6Fp9rk24CT1ivRBgUjv6j0F7rxH/sG6Yo+rSVvaMSQCmwwWIQRaCnbGnEJX\n1acdEVB9ZgN/iO+YdQAA9TzGEZFTNgP1F0qg22o463aLlR1av3NSUBSrZv4x\nlpKpW5n924CYY0JRDVoVfaW7Ibl/Pl8Dum+UALMr0x6CjfgJ\n=LfU/\n-----END PGP PRIVATE KEY BLOCK-----\n"
+    }
+  },
+  "v1_observer": [
+    {
+      "name": "deployed v1 message to bob, read with no key",
+      "recipient": "bob",
+      "event": {
+        "kind": 1,
+        "created_at": 1793059200,
+        "tags": [
+          [
+            "t",
+            "ghost-156446D5"
+          ],
+          [
+            "client",
+            "example-client/ghost"
+          ]
+        ],
+        "content": "[ROUTE: 156446D5]\n-----BEGIN PGP MESSAGE-----\n\nwVQDRNCrxr9nMwkZX1TVygrOHyNt7RrdxfsSnS7xnr16NshCTZJhw8zFamAp\nCQU2GVq8A9oVXwOOZOKFJQqWEX6Y6Mfi4tZlKLzAYSHz/vOXRWHW7PfSSgGF\nejW4AsbtPofueGqf1BvBzjJfxl9vZlggnfi3YaViX2I8N9xtQP1ES5w2Bt7i\n1fvEVWXFDTIVrxFWm7WBjMvqz9LZligYuV+c\n=gY/p\n-----END PGP MESSAGE-----\n",
+        "pubkey": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "observed": {
+        "topic_fp8": "156446D5",
+        "header_fp8": "156446D5",
+        "recipient_key_ids": [
+          "44D0ABC6BF673309"
+        ]
+      },
+      "note": "Byte-for-byte the deployed v1 shape, except that deployed clients use a product-specific routing label and client tag where this vector has ROUTE and example-client/ghost."
+    }
+  ],
+  "v1_spoof": {
+    "note": "Encrypted to bob by anyone holding bob's public key; claims to be alice; carries no signature. Decrypts (bob's test key) to the plaintext below. v1 readers file it under alice.",
+    "content": "[ROUTE: 156446D5]\n-----BEGIN PGP MESSAGE-----\n\nwVQDRNCrxr9nMwkZmP5ZTlI4Ty+0Ku9edmxoFhRRBysvJ5sw9Nd+go6/I3wp\nCZ7x+7Vvq9JIJt3LsprMvq9dfoHXUlCOHgeaBvqwu0dTd8vVmb0iswPSUgG8\nyQzAWi9JR8/vNz+C7lIAfEGgbQEyXoXXcFZJ3hdstHXdEeZAdYGAYzInWoLC\n0g8DVoeEjfJ0j+GlqH5B/6SfWZq4iYHsm5d6rEWdWqahKRo=\n=aEzZ\n-----END PGP MESSAGE-----\n",
+    "plaintext": "[FROM:0CE7D35E] send me your seed"
+  },
+  "v2_tags": [
+    {
+      "chan": "6e6b697030362074657374206368616e6e656c20736563726574200000000100",
+      "created_at": 1793059200,
+      "epoch": 20753,
+      "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a"
+    },
+    {
+      "chan": "6e6b697030362074657374206368616e6e656c20736563726574200000000100",
+      "created_at": 1793145599,
+      "epoch": 20753,
+      "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a"
+    },
+    {
+      "chan": "6e6b697030362074657374206368616e6e656c20736563726574200000000100",
+      "created_at": 1793145600,
+      "epoch": 20754,
+      "tag": "954a9fe690914d026541cc8ef213ed07"
+    },
+    {
+      "chan": "6e6b697030362074657374206368616e6e656c20736563726574200000000100",
+      "created_at": 1793059199,
+      "epoch": 20752,
+      "tag": "769c07b8d7de7bf098680322fffd6f2d"
+    },
+    {
+      "chan": "696e74726f2073656372657420666f7220626f622028746573742900000000ff",
+      "created_at": 1793059200,
+      "epoch": 20753,
+      "tag": "c27784e45fdd8972b474f84537745328"
+    },
+    {
+      "chan": "abababababababababababababababababababababababababababababababab",
+      "created_at": 1793059200,
+      "epoch": 20753,
+      "tag": "c9cf4888de1866898a39945f2d82dbee"
+    }
+  ],
+  "v2_example": {
+    "sender": "alice",
+    "recipient": "bob",
+    "chan": "6e6b697030362074657374206368616e6e656c20736563726574200000000100",
+    "event": {
+      "kind": 9061,
+      "created_at": 1793059200,
+      "tags": [
+        [
+          "z",
+          "05a08ec2cdb87fbc8dfc28fac4b6612a"
+        ]
+      ],
+      "content": "-----BEGIN PGP MESSAGE-----\n\nwVQDAAAAAAAAAAAZCyFMo97tzboUXfNMfDaaIfKlXsoQuWfJcvvRT9c9cHAp\nCW0rKzk2jzYgrlcjyBc6OZB0lcSzp5oxZ3sLRKemw020dltKLj/w3/bSwToB\nwaR5gXy/pFUZdAC7LATbDJCsWlNCj1ARaz7esrhs5E8s9ZdlHKyxc1xk7V9z\nT/WKXOrbYGguvsLcFgIbnFlg2mBoyZjFUWuV+6dsxKY4kRSBxQhbKk+w2dZ3\nTTSO1CUYkrKgckv4jzl7+LpnY8WpToCG3tiLZnukLK+k0zJWE8+AiqKBG6/k\n+/C3ZGrbxWZRurPDhtptsng23yt008Cs+YtSXFnsAiI0FRd80J7yt1l6tmhc\nvCU7QWO8qd2yNu1pjusRD1QkoPNPdJOZcUFrJ3qWcZCpim0Wu1c7DqiifxDU\nDMYBfYOlcIwK04t4IL30qZv4wYEOTdwDptjX8LS1YKXHZaKuyZ+O8L2z9laM\nvD4vhUGAarBpN18Dy2LASQC0wHPQcoRZ/z5GFZ9kNU1sFwv7qEV2O+gfplJs\nYDMWIs0CLB2w1M26pj6tH9tOMBEzC2YreLdMGTdtDCPiW/GPle6YKaoIvo/O\n5QX2qvgW+IlmiM2sVCwLpCa1soO7bQLjWJOFx+Il+4RTmgZPJLtnFu1RlXhq\niy6E+sdIkJXoalTsMRS24ydHtSlIv4xvEoaHTL00B9iGBRAuDEXgLq14gDfl\n0DbgGZCpF6VpFcexucwL9USkiUM3xBhE7e2OUA6KmlOwE39VsCFMM7o2+/Kc\n4ogiPIOtQvBKhg==\n=EzDn\n-----END PGP MESSAGE-----\n",
+      "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "inner_plaintext": "{\"v\":\"nkip06/2\",\"type\":\"msg\",\"id\":\"0f1e2d3c4b5a69788796a5b4c3d2e1f0\",\"ts\":1793059200,\"from\":\"920E0E64F77E56FD2D8EFB442A65547C0CE7D35E\",\"to\":\"E9FFFFFE74F75EF516117895434F109B156446D5\",\"body\":\"hello bob\",\"pad\":\"                                             \"}",
+    "note": "Decrypt with bob's private key and verify with alice's public key; the plaintext must equal inner_plaintext."
+  },
+  "v2_events": {
+    "invalid": [
+      {
+        "name": "kind 1 (public note)",
+        "event": {
+          "kind": 1,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\n\nwVQDAAAAAAAAAAAZCyFMo97tzboUXfNMfDaaIfKlXsoQuWfJcvvRT9c9cHAp\nCW0rKzk2jzYgrlcjyBc6OZB0lcSzp5oxZ3sLRKemw020dltKLj/w3/bSwToB\nwaR5gXy/pFUZdAC7LATbDJCsWlNCj1ARaz7esrhs5E8s9ZdlHKyxc1xk7V9z\nT/WKXOrbYGguvsLcFgIbnFlg2mBoyZjFUWuV+6dsxKY4kRSBxQhbKk+w2dZ3\nTTSO1CUYkrKgckv4jzl7+LpnY8WpToCG3tiLZnukLK+k0zJWE8+AiqKBG6/k\n+/C3ZGrbxWZRurPDhtptsng23yt008Cs+YtSXFnsAiI0FRd80J7yt1l6tmhc\nvCU7QWO8qd2yNu1pjusRD1QkoPNPdJOZcUFrJ3qWcZCpim0Wu1c7DqiifxDU\nDMYBfYOlcIwK04t4IL30qZv4wYEOTdwDptjX8LS1YKXHZaKuyZ+O8L2z9laM\nvD4vhUGAarBpN18Dy2LASQC0wHPQcoRZ/z5GFZ9kNU1sFwv7qEV2O+gfplJs\nYDMWIs0CLB2w1M26pj6tH9tOMBEzC2YreLdMGTdtDCPiW/GPle6YKaoIvo/O\n5QX2qvgW+IlmiM2sVCwLpCa1soO7bQLjWJOFx+Il+4RTmgZPJLtnFu1RlXhq\niy6E+sdIkJXoalTsMRS24ydHtSlIv4xvEoaHTL00B9iGBRAuDEXgLq14gDfl\n0DbgGZCpF6VpFcexucwL9USkiUM3xBhE7e2OUA6KmlOwE39VsCFMM7o2+/Kc\n4ogiPIOtQvBKhg==\n=EzDn\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "reason": "wrong kind"
+      },
+      {
+        "name": "extra p tag",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ],
+            [
+              "p",
+              "3333333333333333333333333333333333333333333333333333333333333333"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\n\nwVQDAAAAAAAAAAAZCyFMo97tzboUXfNMfDaaIfKlXsoQuWfJcvvRT9c9cHAp\nCW0rKzk2jzYgrlcjyBc6OZB0lcSzp5oxZ3sLRKemw020dltKLj/w3/bSwToB\nwaR5gXy/pFUZdAC7LATbDJCsWlNCj1ARaz7esrhs5E8s9ZdlHKyxc1xk7V9z\nT/WKXOrbYGguvsLcFgIbnFlg2mBoyZjFUWuV+6dsxKY4kRSBxQhbKk+w2dZ3\nTTSO1CUYkrKgckv4jzl7+LpnY8WpToCG3tiLZnukLK+k0zJWE8+AiqKBG6/k\n+/C3ZGrbxWZRurPDhtptsng23yt008Cs+YtSXFnsAiI0FRd80J7yt1l6tmhc\nvCU7QWO8qd2yNu1pjusRD1QkoPNPdJOZcUFrJ3qWcZCpim0Wu1c7DqiifxDU\nDMYBfYOlcIwK04t4IL30qZv4wYEOTdwDptjX8LS1YKXHZaKuyZ+O8L2z9laM\nvD4vhUGAarBpN18Dy2LASQC0wHPQcoRZ/z5GFZ9kNU1sFwv7qEV2O+gfplJs\nYDMWIs0CLB2w1M26pj6tH9tOMBEzC2YreLdMGTdtDCPiW/GPle6YKaoIvo/O\n5QX2qvgW+IlmiM2sVCwLpCa1soO7bQLjWJOFx+Il+4RTmgZPJLtnFu1RlXhq\niy6E+sdIkJXoalTsMRS24ydHtSlIv4xvEoaHTL00B9iGBRAuDEXgLq14gDfl\n0DbgGZCpF6VpFcexucwL9USkiUM3xBhE7e2OUA6KmlOwE39VsCFMM7o2+/Kc\n4ogiPIOtQvBKhg==\n=EzDn\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "reason": "exactly one z tag"
+      },
+      {
+        "name": "v1 topic tag",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "t",
+              "ghost-156446D5"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\n\nwVQDAAAAAAAAAAAZCyFMo97tzboUXfNMfDaaIfKlXsoQuWfJcvvRT9c9cHAp\nCW0rKzk2jzYgrlcjyBc6OZB0lcSzp5oxZ3sLRKemw020dltKLj/w3/bSwToB\nwaR5gXy/pFUZdAC7LATbDJCsWlNCj1ARaz7esrhs5E8s9ZdlHKyxc1xk7V9z\nT/WKXOrbYGguvsLcFgIbnFlg2mBoyZjFUWuV+6dsxKY4kRSBxQhbKk+w2dZ3\nTTSO1CUYkrKgckv4jzl7+LpnY8WpToCG3tiLZnukLK+k0zJWE8+AiqKBG6/k\n+/C3ZGrbxWZRurPDhtptsng23yt008Cs+YtSXFnsAiI0FRd80J7yt1l6tmhc\nvCU7QWO8qd2yNu1pjusRD1QkoPNPdJOZcUFrJ3qWcZCpim0Wu1c7DqiifxDU\nDMYBfYOlcIwK04t4IL30qZv4wYEOTdwDptjX8LS1YKXHZaKuyZ+O8L2z9laM\nvD4vhUGAarBpN18Dy2LASQC0wHPQcoRZ/z5GFZ9kNU1sFwv7qEV2O+gfplJs\nYDMWIs0CLB2w1M26pj6tH9tOMBEzC2YreLdMGTdtDCPiW/GPle6YKaoIvo/O\n5QX2qvgW+IlmiM2sVCwLpCa1soO7bQLjWJOFx+Il+4RTmgZPJLtnFu1RlXhq\niy6E+sdIkJXoalTsMRS24ydHtSlIv4xvEoaHTL00B9iGBRAuDEXgLq14gDfl\n0DbgGZCpF6VpFcexucwL9USkiUM3xBhE7e2OUA6KmlOwE39VsCFMM7o2+/Kc\n4ogiPIOtQvBKhg==\n=EzDn\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "reason": "exactly one z tag"
+      },
+      {
+        "name": "uppercase tag",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05A08EC2CDB87FBC8DFC28FAC4B6612A"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\n\nwVQDAAAAAAAAAAAZCyFMo97tzboUXfNMfDaaIfKlXsoQuWfJcvvRT9c9cHAp\nCW0rKzk2jzYgrlcjyBc6OZB0lcSzp5oxZ3sLRKemw020dltKLj/w3/bSwToB\nwaR5gXy/pFUZdAC7LATbDJCsWlNCj1ARaz7esrhs5E8s9ZdlHKyxc1xk7V9z\nT/WKXOrbYGguvsLcFgIbnFlg2mBoyZjFUWuV+6dsxKY4kRSBxQhbKk+w2dZ3\nTTSO1CUYkrKgckv4jzl7+LpnY8WpToCG3tiLZnukLK+k0zJWE8+AiqKBG6/k\n+/C3ZGrbxWZRurPDhtptsng23yt008Cs+YtSXFnsAiI0FRd80J7yt1l6tmhc\nvCU7QWO8qd2yNu1pjusRD1QkoPNPdJOZcUFrJ3qWcZCpim0Wu1c7DqiifxDU\nDMYBfYOlcIwK04t4IL30qZv4wYEOTdwDptjX8LS1YKXHZaKuyZ+O8L2z9laM\nvD4vhUGAarBpN18Dy2LASQC0wHPQcoRZ/z5GFZ9kNU1sFwv7qEV2O+gfplJs\nYDMWIs0CLB2w1M26pj6tH9tOMBEzC2YreLdMGTdtDCPiW/GPle6YKaoIvo/O\n5QX2qvgW+IlmiM2sVCwLpCa1soO7bQLjWJOFx+Il+4RTmgZPJLtnFu1RlXhq\niy6E+sdIkJXoalTsMRS24ydHtSlIv4xvEoaHTL00B9iGBRAuDEXgLq14gDfl\n0DbgGZCpF6VpFcexucwL9USkiUM3xBhE7e2OUA6KmlOwE39VsCFMM7o2+/Kc\n4ogiPIOtQvBKhg==\n=EzDn\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "reason": "32 lowercase hex"
+      },
+      {
+        "name": "plaintext routing header",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ]
+          ],
+          "content": "[ROUTE: 156446D5]\n-----BEGIN PGP MESSAGE-----\n\nwVQDAAAAAAAAAAAZCyFMo97tzboUXfNMfDaaIfKlXsoQuWfJcvvRT9c9cHAp\nCW0rKzk2jzYgrlcjyBc6OZB0lcSzp5oxZ3sLRKemw020dltKLj/w3/bSwToB\nwaR5gXy/pFUZdAC7LATbDJCsWlNCj1ARaz7esrhs5E8s9ZdlHKyxc1xk7V9z\nT/WKXOrbYGguvsLcFgIbnFlg2mBoyZjFUWuV+6dsxKY4kRSBxQhbKk+w2dZ3\nTTSO1CUYkrKgckv4jzl7+LpnY8WpToCG3tiLZnukLK+k0zJWE8+AiqKBG6/k\n+/C3ZGrbxWZRurPDhtptsng23yt008Cs+YtSXFnsAiI0FRd80J7yt1l6tmhc\nvCU7QWO8qd2yNu1pjusRD1QkoPNPdJOZcUFrJ3qWcZCpim0Wu1c7DqiifxDU\nDMYBfYOlcIwK04t4IL30qZv4wYEOTdwDptjX8LS1YKXHZaKuyZ+O8L2z9laM\nvD4vhUGAarBpN18Dy2LASQC0wHPQcoRZ/z5GFZ9kNU1sFwv7qEV2O+gfplJs\nYDMWIs0CLB2w1M26pj6tH9tOMBEzC2YreLdMGTdtDCPiW/GPle6YKaoIvo/O\n5QX2qvgW+IlmiM2sVCwLpCa1soO7bQLjWJOFx+Il+4RTmgZPJLtnFu1RlXhq\niy6E+sdIkJXoalTsMRS24ydHtSlIv4xvEoaHTL00B9iGBRAuDEXgLq14gDfl\n0DbgGZCpF6VpFcexucwL9USkiUM3xBhE7e2OUA6KmlOwE39VsCFMM7o2+/Kc\n4ogiPIOtQvBKhg==\n=EzDn\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "reason": "only an armored PGP message"
+      },
+      {
+        "name": "armor header",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\nComment: some client\n\nwVQDAAAAAAAAAAAZCyFMo97tzboUXfNMfDaaIfKlXsoQuWfJcvvRT9c9cHAp\nCW0rKzk2jzYgrlcjyBc6OZB0lcSzp5oxZ3sLRKemw020dltKLj/w3/bSwToB\nwaR5gXy/pFUZdAC7LATbDJCsWlNCj1ARaz7esrhs5E8s9ZdlHKyxc1xk7V9z\nT/WKXOrbYGguvsLcFgIbnFlg2mBoyZjFUWuV+6dsxKY4kRSBxQhbKk+w2dZ3\nTTSO1CUYkrKgckv4jzl7+LpnY8WpToCG3tiLZnukLK+k0zJWE8+AiqKBG6/k\n+/C3ZGrbxWZRurPDhtptsng23yt008Cs+YtSXFnsAiI0FRd80J7yt1l6tmhc\nvCU7QWO8qd2yNu1pjusRD1QkoPNPdJOZcUFrJ3qWcZCpim0Wu1c7DqiifxDU\nDMYBfYOlcIwK04t4IL30qZv4wYEOTdwDptjX8LS1YKXHZaKuyZ+O8L2z9laM\nvD4vhUGAarBpN18Dy2LASQC0wHPQcoRZ/z5GFZ9kNU1sFwv7qEV2O+gfplJs\nYDMWIs0CLB2w1M26pj6tH9tOMBEzC2YreLdMGTdtDCPiW/GPle6YKaoIvo/O\n5QX2qvgW+IlmiM2sVCwLpCa1soO7bQLjWJOFx+Il+4RTmgZPJLtnFu1RlXhq\niy6E+sdIkJXoalTsMRS24ydHtSlIv4xvEoaHTL00B9iGBRAuDEXgLq14gDfl\n0DbgGZCpF6VpFcexucwL9USkiUM3xBhE7e2OUA6KmlOwE39VsCFMM7o2+/Kc\n4ogiPIOtQvBKhg==\n=EzDn\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "reason": "armor headers"
+      },
+      {
+        "name": "named recipient key id (v1 encryption)",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\n\nwVQDRNCrxr9nMwkZX1TVygrOHyNt7RrdxfsSnS7xnr16NshCTZJhw8zFamAp\nCQU2GVq8A9oVXwOOZOKFJQqWEX6Y6Mfi4tZlKLzAYSHz/vOXRWHW7PfSSgGF\nejW4AsbtPofueGqf1BvBzjJfxl9vZlggnfi3YaViX2I8N9xtQP1ES5w2Bt7i\n1fvEVWXFDTIVrxFWm7WBjMvqz9LZligYuV+c\n=gY/p\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "reason": "wildcard"
+      },
+      {
+        "name": "RFC 9580 v6 PKESK naming the recipient fingerprint",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\n\nwVUGIQarq6urq6urq6urq6urq6urq6urq6urq6urq6urq6urqxkAAQIDBAUGBwgJ\nCgsMDQ4PEBESExQVFhcYGRobHB0eHxAAAQIDBAUGBwgJCgsMDQ4P0lQCCQMGAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\n=zVTV\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "reason": "wildcard"
+      }
+    ],
+    "reused_pubkey": [
+      {
+        "kind": 9061,
+        "created_at": 1793059200,
+        "tags": [
+          [
+            "z",
+            "05a08ec2cdb87fbc8dfc28fac4b6612a"
+          ]
+        ],
+        "content": "-----BEGIN PGP MESSAGE-----\n\nwVQDAAAAAAAAAAAZCyFMo97tzboUXfNMfDaaIfKlXsoQuWfJcvvRT9c9cHAp\nCW0rKzk2jzYgrlcjyBc6OZB0lcSzp5oxZ3sLRKemw020dltKLj/w3/bSwToB\nwaR5gXy/pFUZdAC7LATbDJCsWlNCj1ARaz7esrhs5E8s9ZdlHKyxc1xk7V9z\nT/WKXOrbYGguvsLcFgIbnFlg2mBoyZjFUWuV+6dsxKY4kRSBxQhbKk+w2dZ3\nTTSO1CUYkrKgckv4jzl7+LpnY8WpToCG3tiLZnukLK+k0zJWE8+AiqKBG6/k\n+/C3ZGrbxWZRurPDhtptsng23yt008Cs+YtSXFnsAiI0FRd80J7yt1l6tmhc\nvCU7QWO8qd2yNu1pjusRD1QkoPNPdJOZcUFrJ3qWcZCpim0Wu1c7DqiifxDU\nDMYBfYOlcIwK04t4IL30qZv4wYEOTdwDptjX8LS1YKXHZaKuyZ+O8L2z9laM\nvD4vhUGAarBpN18Dy2LASQC0wHPQcoRZ/z5GFZ9kNU1sFwv7qEV2O+gfplJs\nYDMWIs0CLB2w1M26pj6tH9tOMBEzC2YreLdMGTdtDCPiW/GPle6YKaoIvo/O\n5QX2qvgW+IlmiM2sVCwLpCa1soO7bQLjWJOFx+Il+4RTmgZPJLtnFu1RlXhq\niy6E+sdIkJXoalTsMRS24ydHtSlIv4xvEoaHTL00B9iGBRAuDEXgLq14gDfl\n0DbgGZCpF6VpFcexucwL9USkiUM3xBhE7e2OUA6KmlOwE39VsCFMM7o2+/Kc\n4ogiPIOtQvBKhg==\n=EzDn\n-----END PGP MESSAGE-----\n",
+        "pubkey": "4444444444444444444444444444444444444444444444444444444444444444"
+      },
+      {
+        "kind": 9061,
+        "created_at": 1793059205,
+        "tags": [
+          [
+            "z",
+            "05a08ec2cdb87fbc8dfc28fac4b6612a"
+          ]
+        ],
+        "content": "-----BEGIN PGP MESSAGE-----\n\nwVQDAAAAAAAAAAAZCyFMo97tzboUXfNMfDaaIfKlXsoQuWfJcvvRT9c9cHAp\nCW0rKzk2jzYgrlcjyBc6OZB0lcSzp5oxZ3sLRKemw020dltKLj/w3/bSwToB\nwaR5gXy/pFUZdAC7LATbDJCsWlNCj1ARaz7esrhs5E8s9ZdlHKyxc1xk7V9z\nT/WKXOrbYGguvsLcFgIbnFlg2mBoyZjFUWuV+6dsxKY4kRSBxQhbKk+w2dZ3\nTTSO1CUYkrKgckv4jzl7+LpnY8WpToCG3tiLZnukLK+k0zJWE8+AiqKBG6/k\n+/C3ZGrbxWZRurPDhtptsng23yt008Cs+YtSXFnsAiI0FRd80J7yt1l6tmhc\nvCU7QWO8qd2yNu1pjusRD1QkoPNPdJOZcUFrJ3qWcZCpim0Wu1c7DqiifxDU\nDMYBfYOlcIwK04t4IL30qZv4wYEOTdwDptjX8LS1YKXHZaKuyZ+O8L2z9laM\nvD4vhUGAarBpN18Dy2LASQC0wHPQcoRZ/z5GFZ9kNU1sFwv7qEV2O+gfplJs\nYDMWIs0CLB2w1M26pj6tH9tOMBEzC2YreLdMGTdtDCPiW/GPle6YKaoIvo/O\n5QX2qvgW+IlmiM2sVCwLpCa1soO7bQLjWJOFx+Il+4RTmgZPJLtnFu1RlXhq\niy6E+sdIkJXoalTsMRS24ydHtSlIv4xvEoaHTL00B9iGBRAuDEXgLq14gDfl\n0DbgGZCpF6VpFcexucwL9USkiUM3xBhE7e2OUA6KmlOwE39VsCFMM7o2+/Kc\n4ogiPIOtQvBKhg==\n=EzDn\n-----END PGP MESSAGE-----\n",
+        "pubkey": "4444444444444444444444444444444444444444444444444444444444444444"
+      }
+    ],
+    "valid_extra": [
+      {
+        "name": "RFC 9580 v6 PKESK with an anonymous recipient (shape only, placeholder ciphertext)",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\n\nwTQGABkAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHxAAAQIDBAUGBwgJ\nCgsMDQ4P0lQCCQMGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\n=HYDv\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      }
+    ]
+  },
+  "invites": {
+    "valid": [
+      {
+        "name": "alice v2 invite",
+        "invite": {
+          "ver": 2,
+          "name": "Alice",
+          "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBtI2iofIFY8MUsyFnZLVHl1X6gW9LcV5drbAYpmrj26g80aQWxp\nY2UgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRAq\nZVR8DOfTXkUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\nZ0nznO5Cfqh19UzsDUwwyXPGCAfInNpjoadSpeIwcVwFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBJIODmT3flb9LY77RCplVHwM59NeAAAKhVKgEU2hc6UHikWw\nZTE7S7nhwK5Olxyj/aCxOWIhNNjKn9JfT3iISIxFLPEj+PXv6AqZ7AQgaRhR\ne9c2VBphDQvOJgRq3+mAGTUxwxROU8pRCBJ2WY924BhouWxscYuqlloCbqj5\nkW53wroEGBsKAHAFgmrf6YAJECplVHwM59NeRRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmcK6TEGydZK67BdM+tViCZny3omQP1gp5WQ\n7XllzRsDoAKbDBYhBJIODmT3flb9LY77RCplVHwM59NeAABtbb/+8WdDqZ1A\n/NRDOqRYwpUcrpx2LtDRsQkgrtNKLjqRneVYXy1Yfd5stl6+QiK8fW9M2C8D\ngZfnZU87JA22Kg8=\n=svM+\n-----END PGP PUBLIC KEY BLOCK-----\n",
+          "fp": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "intro": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+        }
+      }
+    ],
+    "invalid": [
+      {
+        "name": "v1 invite",
+        "invite": {
+          "ver": 1,
+          "name": "Alice",
+          "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBtI2iofIFY8MUsyFnZLVHl1X6gW9LcV5drbAYpmrj26g80aQWxp\nY2UgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRAq\nZVR8DOfTXkUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\nZ0nznO5Cfqh19UzsDUwwyXPGCAfInNpjoadSpeIwcVwFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBJIODmT3flb9LY77RCplVHwM59NeAAAKhVKgEU2hc6UHikWw\nZTE7S7nhwK5Olxyj/aCxOWIhNNjKn9JfT3iISIxFLPEj+PXv6AqZ7AQgaRhR\ne9c2VBphDQvOJgRq3+mAGTUxwxROU8pRCBJ2WY924BhouWxscYuqlloCbqj5\nkW53wroEGBsKAHAFgmrf6YAJECplVHwM59NeRRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmcK6TEGydZK67BdM+tViCZny3omQP1gp5WQ\n7XllzRsDoAKbDBYhBJIODmT3flb9LY77RCplVHwM59NeAABtbb/+8WdDqZ1A\n/NRDOqRYwpUcrpx2LtDRsQkgrtNKLjqRneVYXy1Yfd5stl6+QiK8fW9M2C8D\ngZfnZU87JA22Kg8=\n=svM+\n-----END PGP PUBLIC KEY BLOCK-----\n",
+          "fp": "0CE7D35E",
+          "topic": "ghost-0CE7D35E"
+        },
+        "reason": "ver must be 2"
+      },
+      {
+        "name": "short id instead of fingerprint",
+        "invite": {
+          "ver": 2,
+          "name": "Alice",
+          "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBtI2iofIFY8MUsyFnZLVHl1X6gW9LcV5drbAYpmrj26g80aQWxp\nY2UgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRAq\nZVR8DOfTXkUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\nZ0nznO5Cfqh19UzsDUwwyXPGCAfInNpjoadSpeIwcVwFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBJIODmT3flb9LY77RCplVHwM59NeAAAKhVKgEU2hc6UHikWw\nZTE7S7nhwK5Olxyj/aCxOWIhNNjKn9JfT3iISIxFLPEj+PXv6AqZ7AQgaRhR\ne9c2VBphDQvOJgRq3+mAGTUxwxROU8pRCBJ2WY924BhouWxscYuqlloCbqj5\nkW53wroEGBsKAHAFgmrf6YAJECplVHwM59NeRRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmcK6TEGydZK67BdM+tViCZny3omQP1gp5WQ\n7XllzRsDoAKbDBYhBJIODmT3flb9LY77RCplVHwM59NeAABtbb/+8WdDqZ1A\n/NRDOqRYwpUcrpx2LtDRsQkgrtNKLjqRneVYXy1Yfd5stl6+QiK8fW9M2C8D\ngZfnZU87JA22Kg8=\n=svM+\n-----END PGP PUBLIC KEY BLOCK-----\n",
+          "fp": "0CE7D35E",
+          "intro": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+        },
+        "reason": "full fingerprint"
+      },
+      {
+        "name": "fingerprint of another key",
+        "invite": {
+          "ver": 2,
+          "name": "Alice",
+          "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBtI2iofIFY8MUsyFnZLVHl1X6gW9LcV5drbAYpmrj26g80aQWxp\nY2UgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRAq\nZVR8DOfTXkUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\nZ0nznO5Cfqh19UzsDUwwyXPGCAfInNpjoadSpeIwcVwFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBJIODmT3flb9LY77RCplVHwM59NeAAAKhVKgEU2hc6UHikWw\nZTE7S7nhwK5Olxyj/aCxOWIhNNjKn9JfT3iISIxFLPEj+PXv6AqZ7AQgaRhR\ne9c2VBphDQvOJgRq3+mAGTUxwxROU8pRCBJ2WY924BhouWxscYuqlloCbqj5\nkW53wroEGBsKAHAFgmrf6YAJECplVHwM59NeRRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmcK6TEGydZK67BdM+tViCZny3omQP1gp5WQ\n7XllzRsDoAKbDBYhBJIODmT3flb9LY77RCplVHwM59NeAABtbb/+8WdDqZ1A\n/NRDOqRYwpUcrpx2LtDRsQkgrtNKLjqRneVYXy1Yfd5stl6+QiK8fW9M2C8D\ngZfnZU87JA22Kg8=\n=svM+\n-----END PGP PUBLIC KEY BLOCK-----\n",
+          "fp": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "intro": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+        },
+        "reason": "does not match pubKey"
+      },
+      {
+        "name": "intro too short",
+        "invite": {
+          "ver": 2,
+          "name": "Alice",
+          "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBtI2iofIFY8MUsyFnZLVHl1X6gW9LcV5drbAYpmrj26g80aQWxp\nY2UgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRAq\nZVR8DOfTXkUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\nZ0nznO5Cfqh19UzsDUwwyXPGCAfInNpjoadSpeIwcVwFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBJIODmT3flb9LY77RCplVHwM59NeAAAKhVKgEU2hc6UHikWw\nZTE7S7nhwK5Olxyj/aCxOWIhNNjKn9JfT3iISIxFLPEj+PXv6AqZ7AQgaRhR\ne9c2VBphDQvOJgRq3+mAGTUxwxROU8pRCBJ2WY924BhouWxscYuqlloCbqj5\nkW53wroEGBsKAHAFgmrf6YAJECplVHwM59NeRRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmcK6TEGydZK67BdM+tViCZny3omQP1gp5WQ\n7XllzRsDoAKbDBYhBJIODmT3flb9LY77RCplVHwM59NeAABtbb/+8WdDqZ1A\n/NRDOqRYwpUcrpx2LtDRsQkgrtNKLjqRneVYXy1Yfd5stl6+QiK8fW9M2C8D\ngZfnZU87JA22Kg8=\n=svM+\n-----END PGP PUBLIC KEY BLOCK-----\n",
+          "fp": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "intro": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+        },
+        "reason": "intro must be"
+      },
+      {
+        "name": "line break in name",
+        "invite": {
+          "ver": 2,
+          "name": "Alice\nBob",
+          "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBtI2iofIFY8MUsyFnZLVHl1X6gW9LcV5drbAYpmrj26g80aQWxp\nY2UgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRAq\nZVR8DOfTXkUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\nZ0nznO5Cfqh19UzsDUwwyXPGCAfInNpjoadSpeIwcVwFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBJIODmT3flb9LY77RCplVHwM59NeAAAKhVKgEU2hc6UHikWw\nZTE7S7nhwK5Olxyj/aCxOWIhNNjKn9JfT3iISIxFLPEj+PXv6AqZ7AQgaRhR\ne9c2VBphDQvOJgRq3+mAGTUxwxROU8pRCBJ2WY924BhouWxscYuqlloCbqj5\nkW53wroEGBsKAHAFgmrf6YAJECplVHwM59NeRRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmcK6TEGydZK67BdM+tViCZny3omQP1gp5WQ\n7XllzRsDoAKbDBYhBJIODmT3flb9LY77RCplVHwM59NeAABtbb/+8WdDqZ1A\n/NRDOqRYwpUcrpx2LtDRsQkgrtNKLjqRneVYXy1Yfd5stl6+QiK8fW9M2C8D\ngZfnZU87JA22Kg8=\n=svM+\n-----END PGP PUBLIC KEY BLOCK-----\n",
+          "fp": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "intro": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+        },
+        "reason": "bad name"
+      }
+    ]
+  },
+  "receive": [
+    {
+      "name": "message from a contact on its channel",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "accept"
+    },
+    {
+      "name": "v1-style unsigned message claiming to be a contact",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": null,
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: unsigned"
+    },
+    {
+      "name": "signed by someone else, claims to be a contact",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "D00DFEEDD00DFEEDD00DFEEDD00DFEEDD00DFEED",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: signer is not from"
+    },
+    {
+      "name": "forwarded: addressed to another key",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "D00DFEEDD00DFEEDD00DFEEDD00DFEEDD00DFEED",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: not addressed to us"
+    },
+    {
+      "name": "replayed inner id",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": [
+          "0f1e2d3c4b5a69788796a5b4c3d2e1f0"
+        ]
+      },
+      "expect": "reject: replay"
+    },
+    {
+      "name": "contact message on another channel",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "c9cf4888de1866898a39945f2d82dbee",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: tag is not this contact's channel"
+    },
+    {
+      "name": "contact message on the intro channel",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "c27784e45fdd8972b474f84537745328",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: tag is not this contact's channel"
+    },
+    {
+      "name": "signed ts differs from created_at",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1792972800,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: ts differs from created_at"
+    },
+    {
+      "name": "backdated: signed ts and created_at 31 days before the receiver clock",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1790380800,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "e36e59b152e82219d231eda018c0c3e8",
+        "created_at": 1790380800,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: too old"
+    },
+    {
+      "name": "signed ts 1 hour ahead of the receiver clock",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793062860,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793062860,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: from the future"
+    },
+    {
+      "name": "message from an unknown key",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: unknown sender"
+    },
+    {
+      "name": "hello from a new key on the intro channel: contact request",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "hello",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": {
+            "name": "Carol",
+            "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBv93ZdnHpNLIwN6dslYpSytd98zpJBmfuPQd1bb7Lknsc0aQ2Fy\nb2wgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRB9\nZgN/iO+YdUUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\n9NxWWVWAXFppa3xcDrwPavIC7FCV4Fx0t36sehG+VnQFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBFoKdsacQlfVpx0RUH1mA3+I75h1AACrIr/w7RcvelycCz12\n4V5LiCSve6uMz9z8kBvYGlzPLrokZigqjTurRznnanXyxLpSAnSTeuS5a7l/\ndjeULwaP+wnOJgRq3+mAGTz2O3b/ZfS1RziLs+z0os3sNP7a9CwrRRclchFA\nc29cwroEGBsKAHAFgmrf6YAJEH1mA3+I75h1RRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmdroWn2uTbgJPWK9EGBSO/qPQXuvEf+wbpi\nj6tJW9oxJAKbDBYhBFoKdsacQlfVpx0RUH1mA3+I75h1AAD1PMYRkVM2A/UX\nSqDbajjrdouVHVq/c1JQFKtm/jGWkqlbmf3bgJhjQlENWhV9pbshuX8+XwO6\nb5QAsyvTHoKN+Ak=\n=iBga\n-----END PGP PUBLIC KEY BLOCK-----\n",
+            "chan": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef"
+          },
+          "pad": "                                             "
+        },
+        "signer": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "c27784e45fdd8972b474f84537745328",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "request"
+    },
+    {
+      "name": "hello whose pubKey is not the signer's key",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "hello",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "D00DFEEDD00DFEEDD00DFEEDD00DFEEDD00DFEED",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": {
+            "name": "Carol",
+            "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBv93ZdnHpNLIwN6dslYpSytd98zpJBmfuPQd1bb7Lknsc0aQ2Fy\nb2wgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRB9\nZgN/iO+YdUUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\n9NxWWVWAXFppa3xcDrwPavIC7FCV4Fx0t36sehG+VnQFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBFoKdsacQlfVpx0RUH1mA3+I75h1AACrIr/w7RcvelycCz12\n4V5LiCSve6uMz9z8kBvYGlzPLrokZigqjTurRznnanXyxLpSAnSTeuS5a7l/\ndjeULwaP+wnOJgRq3+mAGTz2O3b/ZfS1RziLs+z0os3sNP7a9CwrRRclchFA\nc29cwroEGBsKAHAFgmrf6YAJEH1mA3+I75h1RRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmdroWn2uTbgJPWK9EGBSO/qPQXuvEf+wbpi\nj6tJW9oxJAKbDBYhBFoKdsacQlfVpx0RUH1mA3+I75h1AAD1PMYRkVM2A/UX\nSqDbajjrdouVHVq/c1JQFKtm/jGWkqlbmf3bgJhjQlENWhV9pbshuX8+XwO6\nb5QAsyvTHoKN+Ak=\n=iBga\n-----END PGP PUBLIC KEY BLOCK-----\n",
+            "chan": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef"
+          },
+          "pad": "                                             "
+        },
+        "signer": "D00DFEEDD00DFEEDD00DFEEDD00DFEEDD00DFEED",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "c27784e45fdd8972b474f84537745328",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: hello key is not the signer"
+    },
+    {
+      "name": "contact's new key claiming the contact's name: a new contact request, never an update",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "hello",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": {
+            "name": "Alice",
+            "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBv93ZdnHpNLIwN6dslYpSytd98zpJBmfuPQd1bb7Lknsc0aQ2Fy\nb2wgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRB9\nZgN/iO+YdUUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\n9NxWWVWAXFppa3xcDrwPavIC7FCV4Fx0t36sehG+VnQFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBFoKdsacQlfVpx0RUH1mA3+I75h1AACrIr/w7RcvelycCz12\n4V5LiCSve6uMz9z8kBvYGlzPLrokZigqjTurRznnanXyxLpSAnSTeuS5a7l/\ndjeULwaP+wnOJgRq3+mAGTz2O3b/ZfS1RziLs+z0os3sNP7a9CwrRRclchFA\nc29cwroEGBsKAHAFgmrf6YAJEH1mA3+I75h1RRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmdroWn2uTbgJPWK9EGBSO/qPQXuvEf+wbpi\nj6tJW9oxJAKbDBYhBFoKdsacQlfVpx0RUH1mA3+I75h1AAD1PMYRkVM2A/UX\nSqDbajjrdouVHVq/c1JQFKtm/jGWkqlbmf3bgJhjQlENWhV9pbshuX8+XwO6\nb5QAsyvTHoKN+Ak=\n=iBga\n-----END PGP PUBLIC KEY BLOCK-----\n",
+            "chan": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef"
+          },
+          "pad": "                                             "
+        },
+        "signer": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "c27784e45fdd8972b474f84537745328",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "request"
+    },
+    {
+      "name": "hello from a known contact: channel refresh only, key and name unchanged",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "hello",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": {
+            "name": "Not Alice",
+            "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBtI2iofIFY8MUsyFnZLVHl1X6gW9LcV5drbAYpmrj26g80aQWxp\nY2UgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRAq\nZVR8DOfTXkUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\nZ0nznO5Cfqh19UzsDUwwyXPGCAfInNpjoadSpeIwcVwFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBJIODmT3flb9LY77RCplVHwM59NeAAAKhVKgEU2hc6UHikWw\nZTE7S7nhwK5Olxyj/aCxOWIhNNjKn9JfT3iISIxFLPEj+PXv6AqZ7AQgaRhR\ne9c2VBphDQvOJgRq3+mAGTUxwxROU8pRCBJ2WY924BhouWxscYuqlloCbqj5\nkW53wroEGBsKAHAFgmrf6YAJECplVHwM59NeRRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmcK6TEGydZK67BdM+tViCZny3omQP1gp5WQ\n7XllzRsDoAKbDBYhBJIODmT3flb9LY77RCplVHwM59NeAABtbb/+8WdDqZ1A\n/NRDOqRYwpUcrpx2LtDRsQkgrtNKLjqRneVYXy1Yfd5stl6+QiK8fW9M2C8D\ngZfnZU87JA22Kg8=\n=svM+\n-----END PGP PUBLIC KEY BLOCK-----\n",
+            "chan": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef"
+          },
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "c27784e45fdd8972b474f84537745328",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "accept: channel only"
+    },
+    {
+      "name": "hello with an unreadable pubKey",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "hello",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": {
+            "name": "Carol",
+            "pubKey": "not a key",
+            "chan": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef"
+          },
+          "pad": "                                             "
+        },
+        "signer": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "c27784e45fdd8972b474f84537745328",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: hello key unreadable"
+    },
+    {
+      "name": "hello on a contact channel",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "hello",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": {
+            "name": "Carol",
+            "pubKey": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxiYEat/pgBv93ZdnHpNLIwN6dslYpSytd98zpJBmfuPQd1bb7Lknsc0aQ2Fy\nb2wgKE5LSVAtMDAwNiBURVNUIEtFWSnCwA8EExsKAIUFgmrf6YADCwkHCRB9\nZgN/iO+YdUUUAAAAAAAcACBzYWx0QG5vdGF0aW9ucy5vcGVucGdwanMub3Jn\n9NxWWVWAXFppa3xcDrwPavIC7FCV4Fx0t36sehG+VnQFFQoIDgwEFgACAQIZ\nAQKbAwIeARYhBFoKdsacQlfVpx0RUH1mA3+I75h1AACrIr/w7RcvelycCz12\n4V5LiCSve6uMz9z8kBvYGlzPLrokZigqjTurRznnanXyxLpSAnSTeuS5a7l/\ndjeULwaP+wnOJgRq3+mAGTz2O3b/ZfS1RziLs+z0os3sNP7a9CwrRRclchFA\nc29cwroEGBsKAHAFgmrf6YAJEH1mA3+I75h1RRQAAAAAABwAIHNhbHRAbm90\nYXRpb25zLm9wZW5wZ3Bqcy5vcmdroWn2uTbgJPWK9EGBSO/qPQXuvEf+wbpi\nj6tJW9oxJAKbDBYhBFoKdsacQlfVpx0RUH1mA3+I75h1AAD1PMYRkVM2A/UX\nSqDbajjrdouVHVq/c1JQFKtm/jGWkqlbmf3bgJhjQlENWhV9pbshuX8+XwO6\nb5QAsyvTHoKN+Ak=\n=iBga\n-----END PGP PUBLIC KEY BLOCK-----\n",
+            "chan": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef"
+          },
+          "pad": "                                             "
+        },
+        "signer": "5A0A76C69C4257D5A71D11507D66037F88EF9875",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: hello not on an intro channel"
+    },
+    {
+      "name": "rekey without a new channel secret",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "rekey",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": {},
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: rekey without chan"
+    },
+    {
+      "name": "unknown version",
+      "case": {
+        "inner": {
+          "v": "nkip06/9",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: unknown version"
+    },
+    {
+      "name": "ts as a string",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": "1793059200",
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: ts is not an integer"
+    },
+    {
+      "name": "ts null",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+          "ts": null,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": []
+      },
+      "expect": "reject: ts is not an integer"
+    },
+    {
+      "name": "same body, new inner id: a new message (no content dedupe)",
+      "case": {
+        "inner": {
+          "v": "nkip06/2",
+          "type": "msg",
+          "id": "11111111111111111111111111111111",
+          "ts": 1793059200,
+          "from": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+          "to": "E9FFFFFE74F75EF516117895434F109B156446D5",
+          "body": "hello bob",
+          "pad": "                                             "
+        },
+        "signer": "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E",
+        "own": "E9FFFFFE74F75EF516117895434F109B156446D5",
+        "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+        "created_at": 1793059200,
+        "now": 1793059260,
+        "contacts": {
+          "920E0E64F77E56FD2D8EFB442A65547C0CE7D35E": {
+            "chan_in": "6e6b697030362074657374206368616e6e656c20736563726574200000000100"
+          }
+        },
+        "intro": [
+          "696e74726f2073656372657420666f7220626f622028746573742900000000ff"
+        ],
+        "seen": [
+          "ffffffffffffffffffffffffffffffff"
+        ]
+      },
+      "expect": "accept"
+    }
+  ],
+  "v2_same_day": [
+    {
+      "name": "one conversation secret: the same tag all UTC day, a new tag the next day (the secret itself never changes)",
+      "chan": "6e6b697030362074657374206368616e6e656c20736563726574200000000100",
+      "same_day": [
+        1793059200,
+        1793062800,
+        1793145599
+      ],
+      "tag": "05a08ec2cdb87fbc8dfc28fac4b6612a",
+      "next_day": 1793145600,
+      "next_tag": "954a9fe690914d026541cc8ef213ed07"
+    }
+  ]
+}

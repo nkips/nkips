@@ -1,0 +1,834 @@
+{
+  "nkip": 4,
+  "version": "1",
+  "note": "TEST KEYS ONLY: the private keys are sha256(\"NKIP-0004 test key 1\") and sha256(\"NKIP-0004 test key 2\"). BIP-340 signatures are randomized (aux rand), so implementations check that these verify, not that they reproduce them. current_practice records what the verifier deployed before this NKIP answered (valid|invalid|unsigned).",
+  "test_keys": {
+    "key1": {
+      "sk": "ca9fe8d8cee19ca95063bb8ee35dfbe36d5084422f774dc4c09e35115625492c",
+      "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c"
+    },
+    "key2": {
+      "sk": "d4c8ca192a0293e2c198df8f637ca8ba9f5da7dd4e2c3f2550447b94a6f7d429",
+      "pubkey": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d"
+    }
+  },
+  "valid": [
+    {
+      "name": "catalog object, signer pinned",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "36ede98547f3621c6c2f52d6243289d03c5f640d7c6d8f81cd02ea9aa002ad68a8e58aa31afafd93d5cf507402b620a13486602148b132b0064b8b25ed13ac7b"
+        }
+      },
+      "canonical": "{\"apps\":[{\"id\":\"notes\",\"manifestUrl\":\"https://notes.example.net/manifest.json\",\"name\":\"Notes\",\"publisher\":\"c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d\",\"tags\":[\"tools\"],\"version\":\"1.0.0\"}],\"id\":\"example.org:catalog\",\"published\":\"2026-06-27T12:00:00.000Z\",\"retired\":[],\"revision\":7}",
+      "canonical_sha256": "f6d1ee22896e0315a46c0f73e88209f04b211d86fa6163398f3c8c899b2504d6",
+      "event": {
+        "kind": 30078,
+        "created_at": 1782561600,
+        "tags": [
+          [
+            "d",
+            "example.org:catalog"
+          ]
+        ],
+        "content": "{\"apps\":[{\"id\":\"notes\",\"manifestUrl\":\"https://notes.example.net/manifest.json\",\"name\":\"Notes\",\"publisher\":\"c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d\",\"tags\":[\"tools\"],\"version\":\"1.0.0\"}],\"id\":\"example.org:catalog\",\"published\":\"2026-06-27T12:00:00.000Z\",\"retired\":[],\"revision\":7}",
+        "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+        "id": "70023da3308d86d86b14d30eac25eea57e4b24846f14082d87deeb6cbf87ffbe",
+        "sig": "36ede98547f3621c6c2f52d6243289d03c5f640d7c6d8f81cd02ea9aa002ad68a8e58aa31afafd93d5cf507402b620a13486602148b132b0064b8b25ed13ac7b"
+      },
+      "trusted_keys": [
+        "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c"
+      ],
+      "verdict": "verified"
+    },
+    {
+      "name": "same catalog, signer not in the trust list",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "233ff007d8011ca65780ce9f4da917766794e2b2a6f824d7a09f2744c5d3f23e7cd8a07f758ccf5143952cfbf7656461707b82851dbc719831a9034f5e33beeb"
+        }
+      },
+      "canonical": "{\"apps\":[{\"id\":\"notes\",\"manifestUrl\":\"https://notes.example.net/manifest.json\",\"name\":\"Notes\",\"publisher\":\"c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d\",\"tags\":[\"tools\"],\"version\":\"1.0.0\"}],\"id\":\"example.org:catalog\",\"published\":\"2026-06-27T12:00:00.000Z\",\"retired\":[],\"revision\":7}",
+      "canonical_sha256": "f6d1ee22896e0315a46c0f73e88209f04b211d86fa6163398f3c8c899b2504d6",
+      "event": {
+        "kind": 30078,
+        "created_at": 1782561600,
+        "tags": [
+          [
+            "d",
+            "example.org:catalog"
+          ]
+        ],
+        "content": "{\"apps\":[{\"id\":\"notes\",\"manifestUrl\":\"https://notes.example.net/manifest.json\",\"name\":\"Notes\",\"publisher\":\"c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d\",\"tags\":[\"tools\"],\"version\":\"1.0.0\"}],\"id\":\"example.org:catalog\",\"published\":\"2026-06-27T12:00:00.000Z\",\"retired\":[],\"revision\":7}",
+        "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+        "id": "70023da3308d86d86b14d30eac25eea57e4b24846f14082d87deeb6cbf87ffbe",
+        "sig": "233ff007d8011ca65780ce9f4da917766794e2b2a6f824d7a09f2744c5d3f23e7cd8a07f758ccf5143952cfbf7656461707b82851dbc719831a9034f5e33beeb"
+      },
+      "trusted_keys": [],
+      "verdict": "untrusted"
+    },
+    {
+      "name": "canonicalization stress (key order, numbers, escapes)",
+      "d": "example.org:app:notes",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:app:notes",
+          "z": 1,
+          "é": 2,
+          "😀": 3,
+          "ﬀ": 4,
+          "A": 5,
+          "a": [
+            1.5,
+            1e+21,
+            1e-7,
+            0,
+            0.1,
+            100,
+            -42,
+            123456789012345,
+            5e-324
+          ],
+          "s": "quote \" backslash \\ tab \t newline \n bell \u0007 del  ls   é 😀",
+          "t": true,
+          "f": false,
+          "n": null,
+          "o": {
+            "y": [],
+            "x": {}
+          }
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+          "created_at": 1782561600,
+          "sig": "db34f598f96f61b086cc85151d49688518cdf9d8ce4940da88c2dd9ec354cce3b340b359a3e7bd0d33ce15c516fc1ea7622e365dd6041faefc183a7e6049b6d1"
+        }
+      },
+      "canonical": "{\"A\":5,\"a\":[1.5,1e+21,1e-7,0,0.1,100,-42,123456789012345,5e-324],\"f\":false,\"id\":\"example.org:app:notes\",\"n\":null,\"o\":{\"x\":{},\"y\":[]},\"s\":\"quote \\\" backslash \\\\ tab \\t newline \\n bell \\u0007 del  ls   é 😀\",\"t\":true,\"z\":1,\"é\":2,\"😀\":3,\"ﬀ\":4}",
+      "canonical_sha256": "22ca60478ec3d4c1071513aeb6403b4136fa53d080ba715789dd736c1d11c915",
+      "event": {
+        "kind": 30078,
+        "created_at": 1782561600,
+        "tags": [
+          [
+            "d",
+            "example.org:app:notes"
+          ]
+        ],
+        "content": "{\"A\":5,\"a\":[1.5,1e+21,1e-7,0,0.1,100,-42,123456789012345,5e-324],\"f\":false,\"id\":\"example.org:app:notes\",\"n\":null,\"o\":{\"x\":{},\"y\":[]},\"s\":\"quote \\\" backslash \\\\ tab \\t newline \\n bell \\u0007 del  ls   é 😀\",\"t\":true,\"z\":1,\"é\":2,\"😀\":3,\"ﬀ\":4}",
+        "pubkey": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+        "id": "b18d19e80b68417a069e41585f4cbd8157336701c940602f86ebc9576881a361",
+        "sig": "db34f598f96f61b086cc85151d49688518cdf9d8ce4940da88c2dd9ec354cce3b340b359a3e7bd0d33ce15c516fc1ea7622e365dd6041faefc183a7e6049b6d1"
+      },
+      "trusted_keys": [
+        "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d"
+      ],
+      "verdict": "verified"
+    },
+    {
+      "name": "key rotation object signed by the old key",
+      "d": "example.org:catalog:rotate",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog:rotate",
+          "new_pubkey": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+          "revision": 8,
+          "reason": "scheduled rotation"
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "f27e1e116c8478d6842ff533bb60d7b7ed847148122bec4c4d355e4a5e6ce63fbc9f4c3b6ac11affd424fe9c3f8fb167f2988133b3ffebec524ac98bfc8f4ea6"
+        }
+      },
+      "canonical": "{\"id\":\"example.org:catalog:rotate\",\"new_pubkey\":\"c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d\",\"reason\":\"scheduled rotation\",\"revision\":8}",
+      "canonical_sha256": "a22d37624ab761e741c23dcaaf1a9565008024b2d8522796daa12b52db6d64f3",
+      "event": {
+        "kind": 30078,
+        "created_at": 1782561600,
+        "tags": [
+          [
+            "d",
+            "example.org:catalog:rotate"
+          ]
+        ],
+        "content": "{\"id\":\"example.org:catalog:rotate\",\"new_pubkey\":\"c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d\",\"reason\":\"scheduled rotation\",\"revision\":8}",
+        "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+        "id": "ebe83e89199902a3da23a6402200a376304c5794317ec1f0c039c38cc0536405",
+        "sig": "f27e1e116c8478d6842ff533bb60d7b7ed847148122bec4c4d355e4a5e6ce63fbc9f4c3b6ac11affd424fe9c3f8fb167f2988133b3ffebec524ac98bfc8f4ea6"
+      },
+      "trusted_keys": [
+        "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c"
+      ],
+      "verdict": "verified"
+    }
+  ],
+  "invalid": [
+    {
+      "name": "tampered payload field",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://evil.example/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "36ede98547f3621c6c2f52d6243289d03c5f640d7c6d8f81cd02ea9aa002ad68a8e58aa31afafd93d5cf507402b620a13486602148b132b0064b8b25ed13ac7b"
+        }
+      },
+      "verdict": "invalid",
+      "reason": "signature does not verify",
+      "current_practice": "invalid"
+    },
+    {
+      "name": "wrong d tag (context)",
+      "d": "example.org:app:notes",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "36ede98547f3621c6c2f52d6243289d03c5f640d7c6d8f81cd02ea9aa002ad68a8e58aa31afafd93d5cf507402b620a13486602148b132b0064b8b25ed13ac7b"
+        }
+      },
+      "verdict": "invalid",
+      "reason": "signature does not verify",
+      "current_practice": "invalid"
+    },
+    {
+      "name": "pubkey swapped for another key",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+          "created_at": 1782561600,
+          "sig": "36ede98547f3621c6c2f52d6243289d03c5f640d7c6d8f81cd02ea9aa002ad68a8e58aa31afafd93d5cf507402b620a13486602148b132b0064b8b25ed13ac7b"
+        }
+      },
+      "verdict": "invalid",
+      "reason": "signature does not verify",
+      "current_practice": "invalid"
+    },
+    {
+      "name": "created_at changed",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561601,
+          "sig": "36ede98547f3621c6c2f52d6243289d03c5f640d7c6d8f81cd02ea9aa002ad68a8e58aa31afafd93d5cf507402b620a13486602148b132b0064b8b25ed13ac7b"
+        }
+      },
+      "verdict": "invalid",
+      "reason": "signature does not verify",
+      "current_practice": "invalid"
+    },
+    {
+      "name": "signed over a non-canonical serialization",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "efdcc2cef06c856ee52982696a267c1a4ce3ddd564ce5f60c9ba98ac00b54ee3bc929c5935023d4d6a8802137a88549b0ac29e67ff54c923f286eb649857a4d8"
+        }
+      },
+      "verdict": "invalid",
+      "reason": "signature does not verify",
+      "current_practice": "invalid"
+    },
+    {
+      "name": "signed as another event kind",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "2e94b6037a6b814824911a1506798462ce95ac31b57329cf7a79f3a651d2993f93d96c0dbf0799d2e64edc134a987758696df1729888ad9a5ab86ebe73500e48"
+        }
+      },
+      "verdict": "invalid",
+      "reason": "signature does not verify",
+      "current_practice": "invalid"
+    },
+    {
+      "name": "unknown alg",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "ed25519",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "36ede98547f3621c6c2f52d6243289d03c5f640d7c6d8f81cd02ea9aa002ad68a8e58aa31afafd93d5cf507402b620a13486602148b132b0064b8b25ed13ac7b"
+        }
+      },
+      "verdict": "invalid",
+      "reason": "unsupported alg",
+      "current_practice": "valid"
+    },
+    {
+      "name": "signature object without sig",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600
+        }
+      },
+      "verdict": "invalid",
+      "reason": "malformed signature",
+      "current_practice": "unsigned"
+    },
+    {
+      "name": "pubkey in upper case",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "AE3DA91C95093DE221A62699E26E064AB85A9178648E5397BEDF655AF9D9EB8C",
+          "created_at": 1782561600,
+          "sig": "36ede98547f3621c6c2f52d6243289d03c5f640d7c6d8f81cd02ea9aa002ad68a8e58aa31afafd93d5cf507402b620a13486602148b132b0064b8b25ed13ac7b"
+        }
+      },
+      "verdict": "invalid",
+      "reason": "malformed signature",
+      "current_practice": "invalid"
+    },
+    {
+      "name": "payload with a top-level member named \"manifest\"",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": [],
+          "manifest": {
+            "note": "nested"
+          }
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "32564ea581f311534ddf1c6cd3c58c2b2a4f8625608637f2f30bb7383d565c656277fe7a11ddc862e6f5e3e001f9c087f3d30d2c9b2a3dc354d87794e65225de"
+        }
+      },
+      "verdict": "invalid",
+      "reason": "payload has a top-level member named \"manifest\"",
+      "current_practice": "valid"
+    },
+    {
+      "name": "member named \"signature\" inside the payload",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ],
+              "signature": "anything"
+            }
+          ],
+          "retired": []
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "36ede98547f3621c6c2f52d6243289d03c5f640d7c6d8f81cd02ea9aa002ad68a8e58aa31afafd93d5cf507402b620a13486602148b132b0064b8b25ed13ac7b"
+        }
+      },
+      "verdict": "invalid",
+      "reason": "payload contains a member named \"signature\"",
+      "current_practice": "valid"
+    }
+  ],
+  "text": [
+    {
+      "name": "duplicate member name (a first-wins parser would read revision 99)",
+      "d": "example.org:catalog",
+      "envelope_text": "{\"manifest\":{\"id\":\"example.org:catalog\",\"revision\":99,\"revision\":7,\"published\":\"2026-06-27T12:00:00.000Z\",\"apps\":[{\"id\":\"notes\",\"name\":\"Notes\",\"manifestUrl\":\"https://notes.example.net/manifest.json\",\"publisher\":\"c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d\",\"version\":\"1.0.0\",\"tags\":[\"tools\"]}],\"retired\":[]},\"signature\":{\"alg\":\"nostr-schnorr\",\"pubkey\":\"ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c\",\"created_at\":1782561600,\"sig\":\"36ede98547f3621c6c2f52d6243289d03c5f640d7c6d8f81cd02ea9aa002ad68a8e58aa31afafd93d5cf507402b620a13486602148b132b0064b8b25ed13ac7b\"}}",
+      "verdict": "invalid",
+      "reason": "duplicate member",
+      "current_practice": "valid"
+    },
+    {
+      "name": "lone surrogate in a string (not I-JSON)",
+      "d": "example.org:app:notes",
+      "envelope_text": "{\"manifest\":{\"id\":\"example.org:app:notes\",\"s\":\"\\ud800\"},\"signature\":{\"alg\":\"nostr-schnorr\",\"pubkey\":\"c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d\",\"created_at\":1782561600,\"sig\":\"a8042fcc27cf8517a2f3e3d5c82165b03c3626d524b9cc09d30026d681bcfa5e604f0ebf63fcd42c970e7f21650e9c23dcb32722b929ba4eea4a63887dd91e79\"}}",
+      "verdict": "invalid",
+      "reason": "lone surrogate",
+      "current_practice": "valid"
+    },
+    {
+      "name": "integer beyond 2^53 - 1 (not I-JSON; another parser may read a different value)",
+      "d": "example.org:catalog",
+      "envelope_text": "{\"manifest\":{\"id\":\"example.org:catalog\",\"revision\":9007199254740992,\"published\":\"2026-06-27T12:00:00.000Z\",\"apps\":[{\"id\":\"notes\",\"name\":\"Notes\",\"manifestUrl\":\"https://notes.example.net/manifest.json\",\"publisher\":\"c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d\",\"version\":\"1.0.0\",\"tags\":[\"tools\"]}],\"retired\":[]},\"signature\":{\"alg\":\"nostr-schnorr\",\"pubkey\":\"ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c\",\"created_at\":1782561600,\"sig\":\"ed3473d4156c69e45b440678bf9bc225eb147ccb57a67df0095b9cd6544618593b4d0b6e67b242626f3774ed489b168b5188ba4655d21f665c773981bd957069\"}}",
+      "verdict": "invalid",
+      "reason": "number out of range",
+      "current_practice": "valid"
+    }
+  ],
+  "unsigned": [
+    {
+      "name": "bare payload (no envelope)",
+      "d": "example.org:catalog",
+      "envelope": {
+        "id": "example.org:catalog",
+        "revision": 7,
+        "published": "2026-06-27T12:00:00.000Z",
+        "apps": [
+          {
+            "id": "notes",
+            "name": "Notes",
+            "manifestUrl": "https://notes.example.net/manifest.json",
+            "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+            "version": "1.0.0",
+            "tags": [
+              "tools"
+            ]
+          }
+        ],
+        "retired": []
+      },
+      "verdict": "unsigned"
+    },
+    {
+      "name": "envelope with signature null",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        },
+        "signature": null
+      },
+      "verdict": "unsigned"
+    },
+    {
+      "name": "envelope without signature member",
+      "d": "example.org:catalog",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog",
+          "revision": 7,
+          "published": "2026-06-27T12:00:00.000Z",
+          "apps": [
+            {
+              "id": "notes",
+              "name": "Notes",
+              "manifestUrl": "https://notes.example.net/manifest.json",
+              "publisher": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+              "version": "1.0.0",
+              "tags": [
+                "tools"
+              ]
+            }
+          ],
+          "retired": []
+        }
+      },
+      "verdict": "unsigned"
+    }
+  ],
+  "rotations": [
+    {
+      "name": "well-formed rotation",
+      "d": "example.org:catalog:rotate",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog:rotate",
+          "new_pubkey": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+          "revision": 8,
+          "reason": "scheduled rotation"
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "f4e325c6885dbff0cc51b289032652f13e25f872ec06c5cd0a9827342e65e0bc82390a34e7d3898917b79bf4830986901051c04704ae29b5663405994c663829"
+        }
+      },
+      "context": "example.org:catalog",
+      "pinned": [
+        "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c"
+      ],
+      "action": "rotate",
+      "new_pin": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d"
+    },
+    {
+      "name": "new_pubkey in upper case",
+      "d": "example.org:catalog:rotate",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog:rotate",
+          "new_pubkey": "C79EE07316147AC7114FD49C5F2C437DEA4B7A2E44B1F11F234287D87B44F94D",
+          "revision": 8,
+          "reason": "scheduled rotation"
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "39cf075b13716a982724ab5447f44473c891c804fd176e5a92b285d3fcd40bdad806b2beabbc95906ea491a24f78d8ba4cc2ba70c71aaa7835efc228ca353fb1"
+        }
+      },
+      "context": "example.org:catalog",
+      "pinned": [
+        "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c"
+      ],
+      "action": "ignore",
+      "reason": "new_pubkey"
+    },
+    {
+      "name": "new_pubkey too short",
+      "d": "example.org:catalog:rotate",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog:rotate",
+          "new_pubkey": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f9",
+          "revision": 8,
+          "reason": "scheduled rotation"
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "349d68becf8e12e57a04b30e12ef5d82875ad684715b0b4948f859e9da534f06ae74323fa6d7309331c5f0d5175cdf6b7d9b395dd50523c30c445e10babf70f5"
+        }
+      },
+      "context": "example.org:catalog",
+      "pinned": [
+        "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c"
+      ],
+      "action": "ignore",
+      "reason": "new_pubkey"
+    },
+    {
+      "name": "rotation signed by a key that is not pinned",
+      "d": "example.org:catalog:rotate",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:catalog:rotate",
+          "new_pubkey": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+          "revision": 8,
+          "reason": "scheduled rotation"
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+          "created_at": 1782561600,
+          "sig": "5bd7f56dbeee916d29f6f628750d953cf91eeea881b2d8d89f4d04c09b8c3ab34c2ea622b57223bc172e85662f990e7ff284d90c0c2b037bc0f4a507dad3d66c"
+        }
+      },
+      "context": "example.org:catalog",
+      "pinned": [
+        "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c"
+      ],
+      "action": "ignore",
+      "reason": "not signed by the pinned key"
+    },
+    {
+      "name": "rotation id names another context",
+      "d": "example.org:catalog:rotate",
+      "envelope": {
+        "manifest": {
+          "id": "example.org:other:rotate",
+          "new_pubkey": "c79ee07316147ac7114fd49c5f2c437dea4b7a2e44b1f11f234287d87b44f94d",
+          "revision": 8,
+          "reason": "scheduled rotation"
+        },
+        "signature": {
+          "alg": "nostr-schnorr",
+          "pubkey": "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c",
+          "created_at": 1782561600,
+          "sig": "1da4d880fd2fc6dd54c859c48d0a95dba06cc7388989bc386248e9474d23dc9b1013f877913599467b3aa0f374c2e82a2b14d40ae81c261ac5ce9de5945109d9"
+        }
+      },
+      "context": "example.org:catalog",
+      "pinned": [
+        "ae3da91c95093de221a62699e26e064ab85a9178648e5397bedf655af9d9eb8c"
+      ],
+      "action": "ignore",
+      "reason": "id"
+    }
+  ],
+  "replay": {
+    "note": "Revision gate: cached revision 7. A consumer applies a strictly higher revision, keeps its cached copy for an equal revision (reporting it when the bytes differ), and refuses a lower one.",
+    "cached": {
+      "revision": 7,
+      "canonical_sha256": "f6d1ee22896e0315a46c0f73e88209f04b211d86fa6163398f3c8c899b2504d6"
+    },
+    "cases": [
+      {
+        "revision": 8,
+        "same_bytes": false,
+        "action": "apply"
+      },
+      {
+        "revision": 7,
+        "same_bytes": true,
+        "action": "keep"
+      },
+      {
+        "revision": 7,
+        "same_bytes": false,
+        "action": "keep",
+        "report": true
+      },
+      {
+        "revision": 6,
+        "same_bytes": false,
+        "action": "refuse"
+      }
+    ]
+  }
+}

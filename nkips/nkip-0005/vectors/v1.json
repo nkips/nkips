@@ -1,0 +1,860 @@
+{
+  "nkip": 5,
+  "version": "1",
+  "note": "Expected results follow NKIP-0005 v1. Addresses are examples; nothing is resolved over the network.",
+  "tokenize": [
+    {
+      "name": "plain",
+      "content": "Buying $XMR today",
+      "cashtags": [
+        "XMR"
+      ]
+    },
+    {
+      "name": "lower and mixed case normalize",
+      "content": "$xmr and $Btc",
+      "cashtags": [
+        "XMR",
+        "BTC"
+      ]
+    },
+    {
+      "name": "first-seen order, no duplicates",
+      "content": "$SOL $XMR $sol",
+      "cashtags": [
+        "SOL",
+        "XMR"
+      ]
+    },
+    {
+      "name": "prices are not cashtags",
+      "content": "it hit $562.82, then $5",
+      "cashtags": []
+    },
+    {
+      "name": "one letter is too short",
+      "content": "$X marks it",
+      "cashtags": []
+    },
+    {
+      "name": "seven letters is too long",
+      "content": "$ABCDEFG",
+      "cashtags": []
+    },
+    {
+      "name": "six letters is fine",
+      "content": "$ABCDEF.",
+      "cashtags": [
+        "ABCDEF"
+      ]
+    },
+    {
+      "name": "digit after the letters",
+      "content": "$XMR2 and $1INCH",
+      "cashtags": []
+    },
+    {
+      "name": "underscore after the letters",
+      "content": "$XMR_ is not",
+      "cashtags": []
+    },
+    {
+      "name": "letter before the dollar sign",
+      "content": "US$XMR",
+      "cashtags": []
+    },
+    {
+      "name": "double dollar sign",
+      "content": "$$XMR",
+      "cashtags": []
+    },
+    {
+      "name": "non-ASCII letter after the letters",
+      "content": "$XMRé",
+      "cashtags": []
+    },
+    {
+      "name": "non-ASCII letter inside",
+      "content": "$XMÉR",
+      "cashtags": []
+    },
+    {
+      "name": "punctuation and emoji are boundaries",
+      "content": "($XMR), $BTC! $ETH🚀 \"$SOL\"",
+      "cashtags": [
+        "XMR",
+        "BTC",
+        "ETH",
+        "SOL"
+      ]
+    },
+    {
+      "name": "start and end of text",
+      "content": "$ZEC",
+      "cashtags": [
+        "ZEC"
+      ]
+    },
+    {
+      "name": "inside a URL is not a cashtag",
+      "content": "see https://example.com/q?$XMR and $BTC",
+      "cashtags": [
+        "BTC"
+      ]
+    },
+    {
+      "name": "inside a nostr entity is not a cashtag",
+      "content": "nostr:npub1abc$xmr",
+      "cashtags": []
+    },
+    {
+      "name": "newline is a boundary",
+      "content": "line\n$XMR\n",
+      "cashtags": [
+        "XMR"
+      ]
+    },
+    {
+      "name": "inline code is skipped",
+      "content": "run `echo $HOME` then buy $XMR",
+      "cashtags": [
+        "XMR"
+      ]
+    },
+    {
+      "name": "fenced code block is skipped",
+      "content": "```\nprice=$BTC\n```\n$SOL",
+      "cashtags": [
+        "SOL"
+      ]
+    },
+    {
+      "name": "unclosed fence runs to the end",
+      "content": "$ETH ```\n$BTC",
+      "cashtags": [
+        "ETH"
+      ]
+    },
+    {
+      "name": "combining mark after the letters",
+      "content": "$XMŔ is not",
+      "cashtags": []
+    },
+    {
+      "name": "combining mark before the dollar sign",
+      "content": "é$XMR",
+      "cashtags": []
+    },
+    {
+      "name": "non-ASCII digit after the letters",
+      "content": "$XMR٣",
+      "cashtags": []
+    },
+    {
+      "name": "non-ASCII digit before the dollar sign",
+      "content": "٣$XMR",
+      "cashtags": []
+    },
+    {
+      "name": "superscript number after the letters",
+      "content": "$XMR²",
+      "cashtags": []
+    }
+  ],
+  "events": [
+    {
+      "name": "three-element tag",
+      "event": {
+        "kind": 1,
+        "content": "$XMR looks good",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "expanded mode",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "expanded"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "expanded",
+        "asset": null
+      }
+    },
+    {
+      "name": "missing mode reads as compact",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "unknown mode reads as compact",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "huge"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "lower-case tag ticker is normalized",
+      "event": {
+        "kind": 1,
+        "content": "$xmr",
+        "tags": [
+          [
+            "cashtag",
+            "xmr",
+            "compact"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "ticker not in the content: no attachment",
+      "event": {
+        "kind": 1,
+        "content": "$BTC only",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact"
+          ]
+        ]
+      },
+      "embed": null
+    },
+    {
+      "name": "ticker only inside a URL: no attachment",
+      "event": {
+        "kind": 1,
+        "content": "https://example.com/$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact"
+          ]
+        ]
+      },
+      "embed": null
+    },
+    {
+      "name": "invalid tag ticker",
+      "event": {
+        "kind": 1,
+        "content": "$XMR2",
+        "tags": [
+          [
+            "cashtag",
+            "XMR2",
+            "compact"
+          ]
+        ]
+      },
+      "embed": null
+    },
+    {
+      "name": "only the first cashtag tag counts",
+      "event": {
+        "kind": 1,
+        "content": "$XMR $BTC",
+        "tags": [
+          [
+            "cashtag",
+            "BTC",
+            "compact"
+          ],
+          [
+            "cashtag",
+            "XMR",
+            "expanded"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "BTC",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "native asset with a mapping",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact",
+            "xmr:native"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": {
+          "form": "native",
+          "caip19": "monero:418015bb9ae982a1975da7d79277c270/slip44:128",
+          "symbol_check": false,
+          "id": "xmr:native"
+        }
+      }
+    },
+    {
+      "name": "native asset without a mapping",
+      "event": {
+        "kind": 1,
+        "content": "$HYPE",
+        "tags": [
+          [
+            "cashtag",
+            "HYPE",
+            "compact",
+            "hype:native"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "HYPE",
+        "mode": "compact",
+        "asset": {
+          "form": "native",
+          "caip19": null,
+          "symbol_check": false,
+          "id": "hype:native"
+        }
+      }
+    },
+    {
+      "name": "equity",
+      "event": {
+        "kind": 1,
+        "content": "$NVDA earnings",
+        "tags": [
+          [
+            "cashtag",
+            "NVDA",
+            "expanded",
+            "nvda:equity"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "NVDA",
+        "mode": "expanded",
+        "asset": {
+          "form": "equity",
+          "caip19": null,
+          "symbol_check": false,
+          "id": "nvda:equity"
+        }
+      }
+    },
+    {
+      "name": "token on a chain maps to CAIP-19",
+      "event": {
+        "kind": 1,
+        "content": "$CAT",
+        "tags": [
+          [
+            "cashtag",
+            "CAT",
+            "compact",
+            "cat:solana:7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "CAT",
+        "mode": "compact",
+        "asset": {
+          "form": "token",
+          "caip19": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp/token:7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+          "symbol_check": true,
+          "id": "cat:solana:7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"
+        }
+      }
+    },
+    {
+      "name": "EVM token keeps the address case",
+      "event": {
+        "kind": 1,
+        "content": "$USDC",
+        "tags": [
+          [
+            "cashtag",
+            "USDC",
+            "compact",
+            "usdc:base:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "USDC",
+        "mode": "compact",
+        "asset": {
+          "form": "token",
+          "caip19": "eip155:8453/erc20:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "symbol_check": true,
+          "id": "usdc:base:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        }
+      }
+    },
+    {
+      "name": "CAIP-19 asset id",
+      "event": {
+        "kind": 1,
+        "content": "$USDC",
+        "tags": [
+          [
+            "cashtag",
+            "USDC",
+            "compact",
+            "eip155:1/erc20:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "USDC",
+        "mode": "compact",
+        "asset": {
+          "form": "caip19",
+          "caip19": "eip155:1/erc20:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "symbol_check": true,
+          "id": "eip155:1/erc20:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        }
+      }
+    },
+    {
+      "name": "asset bound to another ticker is ignored",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact",
+            "btc:native"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "chain slug without an address is ignored",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact",
+            "xmr:solana"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "native with an address is ignored",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact",
+            "xmr:native:abc"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "unknown chain slug is ignored",
+      "event": {
+        "kind": 1,
+        "content": "$CAT",
+        "tags": [
+          [
+            "cashtag",
+            "CAT",
+            "compact",
+            "cat:fakechain:abc"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "CAT",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "token on a chain without tokens is ignored",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact",
+            "xmr:monero:abc"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "upper-case short asset id is ignored",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact",
+            "XMR:native"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "non-string asset is ignored",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact",
+            5
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "lower-case ticker and no mode",
+      "event": {
+        "kind": 1,
+        "content": "$xmr",
+        "tags": [
+          [
+            "cashtag",
+            "xmr"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "mode is case-sensitive",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "Expanded"
+          ]
+        ]
+      },
+      "embed": {
+        "ticker": "XMR",
+        "mode": "compact",
+        "asset": null
+      }
+    },
+    {
+      "name": "ticker only inside inline code: no attachment",
+      "event": {
+        "kind": 1,
+        "content": "`$XMR`",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact"
+          ]
+        ]
+      },
+      "embed": null
+    }
+  ],
+  "search": [
+    {
+      "name": "one cashtag",
+      "content": "$XMR to the moon",
+      "tags": [
+        [
+          "t",
+          "$xmr"
+        ]
+      ]
+    },
+    {
+      "name": "dedupe and lower-case",
+      "content": "$Xmr $XMR $btc",
+      "tags": [
+        [
+          "t",
+          "$xmr"
+        ],
+        [
+          "t",
+          "$btc"
+        ]
+      ]
+    },
+    {
+      "name": "no cashtags, no tags",
+      "content": "$5 and #xmr",
+      "tags": []
+    },
+    {
+      "name": "11 distinct and a repeat: first 10 kept",
+      "content": "$XMR $BTC $ETH $SOL $ZEC $LTC $DOGE $ADA $DOT $XRP $TRX $xmr",
+      "tags": [
+        [
+          "t",
+          "$xmr"
+        ],
+        [
+          "t",
+          "$btc"
+        ],
+        [
+          "t",
+          "$eth"
+        ],
+        [
+          "t",
+          "$sol"
+        ],
+        [
+          "t",
+          "$zec"
+        ],
+        [
+          "t",
+          "$ltc"
+        ],
+        [
+          "t",
+          "$doge"
+        ],
+        [
+          "t",
+          "$ada"
+        ],
+        [
+          "t",
+          "$dot"
+        ],
+        [
+          "t",
+          "$xrp"
+        ]
+      ]
+    }
+  ],
+  "resolver": {
+    "eip155:1/erc20:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48": {
+      "symbol": "USDC",
+      "name": "USD Coin"
+    },
+    "eip155:1/erc20:0x1111111111111111111111111111111111111111": {
+      "symbol": "FAKE",
+      "name": "Fake Coin"
+    },
+    "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp/token:7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU": {
+      "symbol": "WCAT",
+      "name": "Wrapped Cat"
+    }
+  },
+  "display": [
+    {
+      "name": "CAIP-19 symbol matches",
+      "event": {
+        "kind": 1,
+        "content": "$USDC",
+        "tags": [
+          [
+            "cashtag",
+            "USDC",
+            "compact",
+            "eip155:1/erc20:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+          ]
+        ]
+      },
+      "display": {
+        "label": "$USDC",
+        "mismatch": false
+      }
+    },
+    {
+      "name": "CAIP-19 symbol differs: shown by its own name",
+      "event": {
+        "kind": 1,
+        "content": "$USDC",
+        "tags": [
+          [
+            "cashtag",
+            "USDC",
+            "compact",
+            "eip155:1/erc20:0x1111111111111111111111111111111111111111"
+          ]
+        ]
+      },
+      "display": {
+        "label": "Fake Coin (FAKE)",
+        "mismatch": true
+      }
+    },
+    {
+      "name": "contract symbol differs: shown by its own name",
+      "event": {
+        "kind": 1,
+        "content": "$CAT",
+        "tags": [
+          [
+            "cashtag",
+            "CAT",
+            "compact",
+            "cat:solana:7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"
+          ]
+        ]
+      },
+      "display": {
+        "label": "Wrapped Cat (WCAT)",
+        "mismatch": true
+      }
+    },
+    {
+      "name": "native id needs no lookup",
+      "event": {
+        "kind": 1,
+        "content": "$XMR",
+        "tags": [
+          [
+            "cashtag",
+            "XMR",
+            "compact",
+            "xmr:native"
+          ]
+        ]
+      },
+      "display": {
+        "label": "$XMR",
+        "mismatch": false
+      }
+    },
+    {
+      "name": "unresolved id falls back to the ticker, flagged",
+      "event": {
+        "kind": 1,
+        "content": "$USDC",
+        "tags": [
+          [
+            "cashtag",
+            "USDC",
+            "compact",
+            "eip155:1/erc20:0x2222222222222222222222222222222222222222"
+          ]
+        ]
+      },
+      "display": {
+        "label": "$USDC",
+        "mismatch": false,
+        "unresolved": true
+      }
+    }
+  ]
+}

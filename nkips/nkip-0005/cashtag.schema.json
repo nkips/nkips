@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nkips.org/nkip-0005/cashtag.schema.json",
+  "title": "NKIP-0005 cashtag tag v1 (as written)",
+  "description": "WRITER form only: what a writer emits. Readers are more lenient (see the spec and the event vectors): they upper-case the ticker (so [\"cashtag\",\"xmr\"] still reads as XMR), a missing or unknown mode reads as compact, a bad asset id is ignored. Rules a schema can't express (the ticker must appear as $TICKER in the content, asset-to-ticker binding, chain-slug table) are in the spec.",
+  "type": "array",
+  "prefixItems": [
+    { "const": "cashtag" },
+    { "type": "string", "pattern": "^[A-Z]{2,6}$" },
+    { "enum": ["compact", "expanded"] },
+    {
+      "type": "string",
+      "anyOf": [
+        { "pattern": "^[a-z0-9]{1,16}:(native|equity)$" },
+        { "pattern": "^[a-z0-9]{1,16}:[a-z0-9]{1,16}:[A-Za-z0-9]{1,128}$" },
+        { "pattern": "^[-a-z0-9]{3,8}:[-_a-zA-Z0-9]{1,32}/[-a-z0-9]{3,8}:[-.%a-zA-Z0-9]{1,128}(/[-.%a-zA-Z0-9]{1,78})?$" }
+      ]
+    }
+  ],
+  "minItems": 3,
+  "maxItems": 4,
+  "items": false
+}
