@@ -1,0 +1,38 @@
+name: Implementation report
+description: You implemented (part of) an NKIP. Tell us so it can be listed, and what was hard.
+labels: [implementation]
+body:
+  - type: dropdown
+    id: nkip
+    attributes:
+      label: Which NKIP?
+      options: [NKIP-0001 Verifiable Deposit Receipts, NKIP-0002 Verifiable Monero Tips on Nostr, NKIP-0003 Sign-In with Monero]
+    validations: { required: true }
+  - type: input
+    id: project
+    attributes:
+      label: Project and link
+      placeholder: Name, URL or repository
+    validations: { required: true }
+  - type: input
+    id: role
+    attributes:
+      label: Role
+      placeholder: e.g. issuer, witness, verifier, wallet, viewer
+    validations: { required: true }
+  - type: dropdown
+    id: vectors
+    attributes:
+      label: Do the test vectors pass?
+      options: [All pass, Some fail (details below), Not run yet]
+    validations: { required: true }
+  - type: textarea
+    id: notes
+    attributes:
+      label: What doesn't conform yet, and anything that was ambiguous
+  - type: checkboxes
+    id: affiliation
+    attributes:
+      label: Affiliation
+      options:
+        - label: I am affiliated with the NKIP authors (kyc.rip, xmr.club, Ripley Terminal). Implementations by the authors are marked as such.

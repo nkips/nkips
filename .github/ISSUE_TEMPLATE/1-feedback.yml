@@ -1,0 +1,26 @@
+name: Spec feedback
+description: A question, objection or correction on an existing NKIP.
+labels: [feedback]
+body:
+  - type: dropdown
+    id: nkip
+    attributes:
+      label: Which NKIP?
+      options: [NKIP-0001 Verifiable Deposit Receipts, NKIP-0002 Verifiable Monero Tips on Nostr, NKIP-0003 Sign-In with Monero, Process / repository]
+    validations: { required: true }
+  - type: input
+    id: section
+    attributes:
+      label: Section or requirement
+      placeholder: e.g. "Witnessing", R6
+  - type: textarea
+    id: issue
+    attributes:
+      label: What's wrong or unclear
+      description: Quote the text if you can. Say what breaks, for whom, and how.
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested change
+      description: Optional. Concrete wording, a new test vector, or a pointer to prior art.

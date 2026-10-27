@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security flaw in a spec privately
+    url: https://github.com/nkips/nkips/security/advisories/new
+    about: For a flaw that is exploitable today (faking a receipt, double-counting a tip, taking over a sign-in).

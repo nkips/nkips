@@ -1,0 +1,30 @@
+name: New NKIP idea
+description: Propose a new standard. Start with the problem, not the solution.
+labels: [proposal]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Who gets hurt today, and how? Real incidents help (no names of victims).
+    validations: { required: true }
+  - type: textarea
+    id: idea
+    attributes:
+      label: Rough idea
+      description: How users could check it without trusting the operator and without giving up privacy.
+    validations: { required: true }
+  - type: textarea
+    id: prior
+    attributes:
+      label: Prior art
+      description: Existing specs, NIPs, BIPs, EIPs, or services that already do part of this.
+  - type: checkboxes
+    id: principles
+    attributes:
+      label: Principles
+      options:
+        - label: It needs no KYC from either party.
+          required: true
+        - label: No role depends on one company's server.
+          required: true
