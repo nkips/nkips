@@ -5,7 +5,7 @@ Checks the vectors: python3 tools/nkip0003.py check nkips/nkip-0003/vectors/v1.j
 Needs pycryptodome (Keccak-256, the pre-SHA-3 padding Monero uses).
 Verification only; this file never signs. The vector signatures were made by
 monero-wallet-rpc v0.18.4.5 `sign` (SigV2) and checked with its `verify`."""
-import hashlib, json, re, sys
+import hashlib, json, re, sys, unicodedata
 from datetime import datetime
 from urllib.parse import parse_qsl, urlsplit
 from Crypto.Hash import keccak
@@ -16,6 +16,21 @@ CTRL = re.compile(r"[\x00-\x1f\x7f]")
 ORIGIN = re.compile(r"^[a-z0-9.-]+(:\d+)?$", re.I)
 DK = re.compile(r"^[0-9a-f]{16}$")
 ADDRESS = re.compile(r"^[48][1-9A-HJ-NP-Za-km-z]{94}$")
+NONCE = re.compile(r"^[A-Za-z0-9_-]{22,128}$")
+SESSION = re.compile(r"^[A-Za-z0-9_-]{1,128}$")
+ALLOWED = set(REQUIRED) | {"purpose", "v"}
+PURPOSE = re.compile(r"^[a-z0-9_-]{1,32}$")
+
+BLANK = {0x115F, 0x1160, 0x3164, 0xFFA0, 0x2800}
+# Default_Ignorable_Code_Point outside C*/Z* (variation selectors, Hangul fillers, etc.)
+DEFAULT_IGNORABLE = [(0x034F, 0x034F), (0x115F, 0x1160), (0x17B4, 0x17B5), (0x180B, 0x180F), (0x3164, 0x3164),
+                     (0xFE00, 0xFE0F), (0xFFA0, 0xFFA0), (0xE0100, 0xE01EF)]
+
+def handle_ok(h):
+    def bad(ch):
+        o = ord(ch)
+        return unicodedata.category(ch)[0] in "CZ" or o in BLANK or any(a <= o <= b for a, b in DEFAULT_IGNORABLE)
+    return 1 <= len(h) <= 64 and not any(bad(ch) for ch in h)
 
 class Refused(ValueError):
     pass
@@ -32,6 +47,8 @@ def parse_challenge(uri):
     keys = [k for k, _ in pairs]
     if len(keys) != len(set(keys)): raise Refused("duplicate parameter")
     p = dict(pairs)
+    unknown = set(p) - ALLOWED
+    if unknown: raise Refused("unknown parameter " + ",".join(sorted(unknown)))
     if p.get("v") != "1": raise Refused("unsupported version")
     p.setdefault("purpose", "login")
     for k in REQUIRED + ["purpose"]:
@@ -40,7 +57,12 @@ def parse_challenge(uri):
     if not ORIGIN.match(p["origin"]): raise Refused("origin is not a bare host")
     if not DK.match(p["dk"]): raise Refused("dk is not 16 lowercase hex")
     if not ADDRESS.match(p["address"]): raise Refused("address is not a 95-character standard address or subaddress")
-    if len(p["nonce"]) < 16: raise Refused("nonce shorter than 16 characters")
+    if len(p["nonce"]) < 22: raise Refused("nonce shorter than 22 characters")
+    if not NONCE.match(p["nonce"]): raise Refused("nonce outside [A-Za-z0-9_-]{22,128}")
+    if not SESSION.match(p["session"]): raise Refused("session outside [A-Za-z0-9_-]{1,128}")
+    if not unicodedata.is_normalized("NFC", p["handle"]): raise Refused("handle is not NFC")
+    if not PURPOSE.match(p["purpose"]): raise Refused("purpose outside [a-z0-9_-]{1,32}")
+    if not handle_ok(p["handle"]): raise Refused("handle has invisible, separator or direction characters, or is too long")
     u = urlsplit(p["return_url"])
     if u.username is not None or u.password is not None or "#" in p["return_url"]:
         raise Refused("return_url must not carry credentials or a fragment")

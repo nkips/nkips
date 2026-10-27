@@ -10,6 +10,18 @@ extension authors) can propose, review and implement.
 | [0002](nkips/nkip-0002.md) | Verifiable Monero Tips on Nostr | Draft |
 | [0003](nkips/nkip-0003.md) | Sign-In with Monero | Draft |
 
+## About
+
+NKIPs grew out of the authors' work on kyc.rip, xmr.club and RipleyOS. They're
+open to everyone, and no NKIP depends on those services: every role can be run
+by anyone, and a proposal becomes Final only with two independent
+implementations. Each NKIP lists known implementations, with the authors' own
+projects marked.
+
+## Related standards
+
+- [XMR402](https://xmr402.org): an open protocol for paying for HTTP requests and other network resources in Monero.
+
 ## Discussion
 
 Open an issue for questions, objections or implementation reports on any NKIP. Security problems in a spec can be reported the same way; there is no private code here to protect.

@@ -86,7 +86,11 @@ def build():
 <ol class="principles"><li><b>Verifiable, not trusted.</b> A claim counts when it can be checked from signatures and public chains.</li>
 <li><b>Private by construction.</b> Public records hold hashes, never plaintext addresses or amounts.</li>
 <li><b>No gatekeeper.</b> No NKIP requires one company's server; every role can be run by anyone.</li>
-<li><b>No KYC, ever.</b> No NKIP asks either party to identify themselves.</li></ol>"""
+<li><b>No KYC, ever.</b> No NKIP asks either party to identify themselves.</li></ol>
+<h2 class="sec">About</h2>
+<p>NKIPs grew out of the authors' work on kyc.rip, xmr.club and RipleyOS. They're open to everyone, and no NKIP depends on those services: every role can be run by anyone, and a proposal becomes Final only with two independent implementations. Each NKIP lists known implementations, with the authors' own projects marked.</p>
+<h2 class="sec">Related standards</h2>
+<ul><li><a href="https://xmr402.org">XMR402</a>: an open protocol for paying for HTTP requests and other network resources in Monero.</li></ul>"""
     (DIST / "index.html").write_text(page("NKIPs: No-KYC Improvement Proposals", index, "Open, vendor-neutral standards for verifiable no-KYC swaps, services and tips.", "/"))
     proc_md = (ROOT / "README.md").read_text().split("## Process", 1)[1].split("## Tools", 1)[0]
     (DIST / "process").mkdir()

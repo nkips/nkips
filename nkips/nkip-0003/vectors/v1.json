@@ -112,7 +112,7 @@
     {
       "name": "short nonce",
       "uri": "monero-signin:?address=497raTyHwdNFVqt247QKVoPWgCLCDRj22CBY6zgP6Xoh6xuqR3Nncv4ejV819yTvzScMopZz65fmBc5abGkpKAkxDUs5zvf&nonce=abc123&session=0b7e5c2a-6c1e-4f0e-9d4a-2f3b8a1c5d6e&origin=example.org&purpose=login&handle=alice&dk=9ee202a85da63321&issued_at=2026-10-27T12%3A00%3A00.000Z&expires_at=2026-10-27T12%3A03%3A00.000Z&return_url=https%3A%2F%2Fauth.example.net%2Fsignin%2Fcallback&v=1",
-      "reason": "nonce shorter than 16 characters"
+      "reason": "nonce shorter than 22 characters"
     },
     {
       "name": "credentials in callback",
@@ -123,6 +123,41 @@
       "name": "fragment in callback",
       "uri": "monero-signin:?address=497raTyHwdNFVqt247QKVoPWgCLCDRj22CBY6zgP6Xoh6xuqR3Nncv4ejV819yTvzScMopZz65fmBc5abGkpKAkxDUs5zvf&nonce=9f86d081884c7d659a2feaa0c55ad015&session=0b7e5c2a-6c1e-4f0e-9d4a-2f3b8a1c5d6e&origin=example.org&purpose=login&handle=alice&dk=9ee202a85da63321&issued_at=2026-10-27T12%3A00%3A00.000Z&expires_at=2026-10-27T12%3A03%3A00.000Z&return_url=https%3A%2F%2Fauth.example.net%2Fcb%23x&v=1",
       "reason": "credentials or a fragment"
+    },
+    {
+      "name": "right-to-left override in handle",
+      "uri": "monero-signin:?address=497raTyHwdNFVqt247QKVoPWgCLCDRj22CBY6zgP6Xoh6xuqR3Nncv4ejV819yTvzScMopZz65fmBc5abGkpKAkxDUs5zvf&nonce=9f86d081884c7d659a2feaa0c55ad015&session=0b7e5c2a-6c1e-4f0e-9d4a-2f3b8a1c5d6e&origin=example.org&purpose=login&handle=ali%E2%80%AEce&dk=9ee202a85da63321&issued_at=2026-10-27T12%3A00%3A00.000Z&expires_at=2026-10-27T12%3A03%3A00.000Z&return_url=https%3A%2F%2Fauth.example.net%2Fsignin%2Fcallback&v=1",
+      "reason": "handle has invisible"
+    },
+    {
+      "name": "zero-width space in handle",
+      "uri": "monero-signin:?address=497raTyHwdNFVqt247QKVoPWgCLCDRj22CBY6zgP6Xoh6xuqR3Nncv4ejV819yTvzScMopZz65fmBc5abGkpKAkxDUs5zvf&nonce=9f86d081884c7d659a2feaa0c55ad015&session=0b7e5c2a-6c1e-4f0e-9d4a-2f3b8a1c5d6e&origin=example.org&purpose=login&handle=ali%E2%80%8Bce&dk=9ee202a85da63321&issued_at=2026-10-27T12%3A00%3A00.000Z&expires_at=2026-10-27T12%3A03%3A00.000Z&return_url=https%3A%2F%2Fauth.example.net%2Fsignin%2Fcallback&v=1",
+      "reason": "handle has invisible"
+    },
+    {
+      "name": "plus in nonce decodes to a space",
+      "uri": "monero-signin:?address=497raTyHwdNFVqt247QKVoPWgCLCDRj22CBY6zgP6Xoh6xuqR3Nncv4ejV819yTvzScMopZz65fmBc5abGkpKAkxDUs5zvf&nonce=9f86d081884c7d65+9a2feaa0c55ad015&session=0b7e5c2a-6c1e-4f0e-9d4a-2f3b8a1c5d6e&origin=example.org&purpose=login&handle=alice&dk=9ee202a85da63321&issued_at=2026-10-27T12%3A00%3A00.000Z&expires_at=2026-10-27T12%3A03%3A00.000Z&return_url=https%3A%2F%2Fauth.example.net%2Fsignin%2Fcallback&v=1",
+      "reason": "nonce outside"
+    },
+    {
+      "name": "uppercase purpose",
+      "uri": "monero-signin:?address=497raTyHwdNFVqt247QKVoPWgCLCDRj22CBY6zgP6Xoh6xuqR3Nncv4ejV819yTvzScMopZz65fmBc5abGkpKAkxDUs5zvf&nonce=9f86d081884c7d659a2feaa0c55ad015&session=0b7e5c2a-6c1e-4f0e-9d4a-2f3b8a1c5d6e&origin=example.org&purpose=Login&handle=alice&dk=9ee202a85da63321&issued_at=2026-10-27T12%3A00%3A00.000Z&expires_at=2026-10-27T12%3A03%3A00.000Z&return_url=https%3A%2F%2Fauth.example.net%2Fsignin%2Fcallback&v=1",
+      "reason": "purpose outside"
+    },
+    {
+      "name": "unknown parameter",
+      "uri": "monero-signin:?address=497raTyHwdNFVqt247QKVoPWgCLCDRj22CBY6zgP6Xoh6xuqR3Nncv4ejV819yTvzScMopZz65fmBc5abGkpKAkxDUs5zvf&nonce=9f86d081884c7d659a2feaa0c55ad015&session=0b7e5c2a-6c1e-4f0e-9d4a-2f3b8a1c5d6e&origin=example.org&purpose=login&handle=alice&dk=9ee202a85da63321&issued_at=2026-10-27T12%3A00%3A00.000Z&expires_at=2026-10-27T12%3A03%3A00.000Z&return_url=https%3A%2F%2Fauth.example.net%2Fsignin%2Fcallback&v=1&theme=dark",
+      "reason": "unknown parameter"
+    },
+    {
+      "name": "handle not in NFC (decomposed e + combining acute)",
+      "uri": "monero-signin:?address=497raTyHwdNFVqt247QKVoPWgCLCDRj22CBY6zgP6Xoh6xuqR3Nncv4ejV819yTvzScMopZz65fmBc5abGkpKAkxDUs5zvf&nonce=9f86d081884c7d659a2feaa0c55ad015&session=0b7e5c2a-6c1e-4f0e-9d4a-2f3b8a1c5d6e&origin=example.org&purpose=login&handle=jose%CC%81&dk=9ee202a85da63321&issued_at=2026-10-27T12%3A00%3A00.000Z&expires_at=2026-10-27T12%3A03%3A00.000Z&return_url=https%3A%2F%2Fauth.example.net%2Fsignin%2Fcallback&v=1",
+      "reason": "handle is not NFC"
+    },
+    {
+      "name": "Hangul filler in handle",
+      "uri": "monero-signin:?address=497raTyHwdNFVqt247QKVoPWgCLCDRj22CBY6zgP6Xoh6xuqR3Nncv4ejV819yTvzScMopZz65fmBc5abGkpKAkxDUs5zvf&nonce=9f86d081884c7d659a2feaa0c55ad015&session=0b7e5c2a-6c1e-4f0e-9d4a-2f3b8a1c5d6e&origin=example.org&purpose=login&handle=alice%E3%85%A4&dk=9ee202a85da63321&issued_at=2026-10-27T12%3A00%3A00.000Z&expires_at=2026-10-27T12%3A03%3A00.000Z&return_url=https%3A%2F%2Fauth.example.net%2Fsignin%2Fcallback&v=1",
+      "reason": "handle has invisible"
     }
   ],
   "bad_signatures": [
