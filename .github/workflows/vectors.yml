@@ -11,6 +11,7 @@ jobs:
       - run: python3 tools/nkip0001.py check nkips/nkip-0001/vectors/v1.json
       - run: pip install pycryptodome
       - run: python3 tools/nkip0003.py check nkips/nkip-0003/vectors/v1.json
+      - run: python3 tools/nkip0001.py check2 nkips/nkip-0001/vectors/v2.json
       - run: python3 tools/nkip0004.py check nkips/nkip-0004/vectors/v1.json
       - run: python3 tools/nkip0005.py check nkips/nkip-0005/vectors/v1.json
       - run: python3 tools/nkip0006.py check nkips/nkip-0006/vectors/v1.json

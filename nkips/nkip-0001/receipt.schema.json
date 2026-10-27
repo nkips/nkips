@@ -1,26 +1,136 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "nkip-0001/receipt.schema.json",
-  "title": "NKIP-0001 deposit receipt (v1, draft)",
+  "title": "NKIP-0001 deposit receipt (v1 and v2)",
   "type": "object",
   "additionalProperties": false,
-  "required": ["v","issuer","order_id","deposit_asset","deposit_address","deposit_amount","payout_asset","payout_address","payout_amount","rate_type","created_at","expires_at","policy_hash","key_id","sig"],
+  "required": [
+    "v",
+    "issuer",
+    "order_id",
+    "deposit_asset",
+    "deposit_address",
+    "deposit_amount",
+    "payout_asset",
+    "payout_address",
+    "payout_amount",
+    "rate_type",
+    "created_at",
+    "expires_at",
+    "policy_hash",
+    "key_id",
+    "sig"
+  ],
   "properties": {
-    "v": {"const": "nkip01/1"},
-    "issuer": {"type": "string", "pattern": "^[a-z0-9.-]+\\.[a-z]{2,}$"},
-    "order_id": {"type": "string", "minLength": 1, "maxLength": 128},
-    "deposit_asset": {"type": "string", "minLength": 1, "maxLength": 32},
-    "deposit_address": {"type": "string", "minLength": 1, "maxLength": 256},
-    "deposit_amount": {"type": "string", "pattern": "^[0-9]+$"},
-    "payout_asset": {"type": "string", "minLength": 1, "maxLength": 32},
-    "payout_address": {"type": "string", "minLength": 1, "maxLength": 256},
-    "payout_amount": {"type": "string", "pattern": "^[0-9]+$"},
-    "rate_type": {"enum": ["fixed", "float"]},
-    "created_at": {"type": "integer", "minimum": 0},
-    "expires_at": {"type": "integer", "minimum": 0},
-    "refund_address": {"type": "string", "maxLength": 256},
-    "policy_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "key_id": {"type": "string", "pattern": "^[0-9a-f]{16}$"},
-    "sig": {"type": "string", "pattern": "^[A-Za-z0-9_-]{86}$"}
-  }
+    "v": {
+      "enum": [
+        "nkip01/1",
+        "nkip01/2"
+      ]
+    },
+    "issuer": {
+      "type": "string",
+      "pattern": "^[a-z0-9.-]+\\.[a-z]{2,}$"
+    },
+    "order_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "deposit_asset": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32
+    },
+    "deposit_address": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "deposit_amount": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "payout_asset": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32
+    },
+    "payout_address": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "payout_amount": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "rate_type": {
+      "enum": [
+        "fixed",
+        "float"
+      ]
+    },
+    "created_at": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "expires_at": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "refund_address": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "policy_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "key_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "sig": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{86}$"
+    },
+    "salt": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "v2: 32 random bytes as hex (all zeros allowed only when deposit_asset is XMR)."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "v": {
+            "const": "nkip01/2"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "salt"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "v": {
+            "const": "nkip01/1"
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "required": [
+            "salt"
+          ]
+        }
+      }
+    }
+  ]
 }
