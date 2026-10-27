@@ -9,11 +9,18 @@ jobs:
         with: { python-version: '3.12' }
       - run: pip install pynacl
       - run: python3 tools/nkip0001.py check nkips/nkip-0001/vectors/v1.json
+      - run: pip install pycryptodome
+      - run: python3 tools/nkip0003.py check nkips/nkip-0003/vectors/v1.json
       - run: pip install jsonschema markdown
       - run: |
           python3 -c "
           import json; from jsonschema import validate
           d=json.load(open('nkips/nkip-0001/vectors/v1.json'))
           validate(d['manifest'], json.load(open('nkips/nkip-0001/manifest.schema.json')))
-          validate(d['vectors'][0]['receipt'], json.load(open('nkips/nkip-0001/receipt.schema.json')))"
+          validate(d['vectors'][0]['receipt'], json.load(open('nkips/nkip-0001/receipt.schema.json')))
+          from urllib.parse import parse_qsl
+          s3=json.load(open('nkips/nkip-0003/challenge.schema.json'))
+          for v in json.load(open('nkips/nkip-0003/vectors/v1.json'))['valid']:
+              validate(dict(parse_qsl(v['uri'].split('?',1)[1])), s3['\$defs']['challenge'])
+              validate({'session':'s','address':dict(parse_qsl(v['uri'].split('?',1)[1]))['address'],'signature':v['signatures'][0]}, s3['\$defs']['callback'])"
       - run: python3 tools/build_site.py
