@@ -107,6 +107,8 @@ FPR = re.compile(r"^([0-9A-F]{40}|[0-9A-F]{64})$")
 def epoch(created_at):
     return created_at // 86400
 
+WINDOW = 30 * 86400
+
 def channel_tag(chan_hex, created_at):
     msg = b"nkip06/2 tag" + epoch(created_at).to_bytes(8, "big")
     return hmac.new(bytes.fromhex(chan_hex), msg, hashlib.sha256).hexdigest()[:32]
@@ -115,8 +117,19 @@ def check_event(ev):
     """v2 event shape -> None, or the reason it is refused."""
     if ev.get("kind") != KIND: return "wrong kind"
     tags = ev.get("tags", [])
-    if len(tags) != 1 or tags[0][0] != "z" or len(tags[0]) != 2: return "exactly one z tag and no other tags"
+    if not tags or tags[0][0] != "z" or len(tags[0]) != 2: return "exactly one z tag first, then only expiration or nonce"
     if not HEX32.match(tags[0][1]): return "z tag is not 32 lowercase hex"
+    seen = set()
+    for tg in tags[1:]:
+        name = tg[0] if tg else ""
+        if name not in ("expiration", "nonce") or name in seen:
+            return "exactly one z tag first, then only expiration or nonce"
+        seen.add(name)
+        if name == "expiration":
+            if len(tg) != 2 or not re.fullmatch(r"[0-9]{1,16}", str(tg[1])): return "expiration must be a Unix time"
+            if int(tg[1]) < ev.get("created_at", 0) + WINDOW: return "expiration earlier than the 30-day window"
+        if name == "nonce":
+            if len(tg) != 3 or not re.fullmatch(r"[0-9]{1,20}", str(tg[1])) or not re.fullmatch(r"[0-9]{1,3}", str(tg[2])): return "nonce tag must be NIP-13 [nonce, n, target]"
     c = ev.get("content", "")
     if not c.startswith("-----BEGIN PGP MESSAGE-----"): return "content must be only an armored PGP message"
     try:

@@ -244,6 +244,46 @@
           "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
         },
         "reason": "wildcard"
+      },
+      {
+        "name": "expiration inside the 30-day window",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ],
+            [
+              "expiration",
+              "1793145600"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\n\nwTQGABkAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHxAAAQIDBAUGBwgJ\nCgsMDQ4P0lQCCQMGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\n=HYDv\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "reason": "expiration earlier than the 30-day window"
+      },
+      {
+        "name": "p tag after z",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ],
+            [
+              "p",
+              "0000000000000000000000000000000000000000000000000000000000000000"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\n\nwTQGABkAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHxAAAQIDBAUGBwgJ\nCgsMDQ4P0lQCCQMGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\n=HYDv\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "reason": "exactly one z tag first, then only expiration or nonce"
       }
     ],
     "reused_pubkey": [
@@ -282,6 +322,30 @@
             [
               "z",
               "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ]
+          ],
+          "content": "-----BEGIN PGP MESSAGE-----\n\nwTQGABkAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHxAAAQIDBAUGBwgJ\nCgsMDQ4P0lQCCQMGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\n=HYDv\n-----END PGP MESSAGE-----\n",
+          "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      },
+      {
+        "name": "NIP-40 expiration (31 days) and NIP-13 nonce allowed after z",
+        "event": {
+          "kind": 9061,
+          "created_at": 1793059200,
+          "tags": [
+            [
+              "z",
+              "05a08ec2cdb87fbc8dfc28fac4b6612a"
+            ],
+            [
+              "expiration",
+              "1795737600"
+            ],
+            [
+              "nonce",
+              "123456",
+              "16"
             ]
           ],
           "content": "-----BEGIN PGP MESSAGE-----\n\nwTQGABkAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHxAAAQIDBAUGBwgJ\nCgsMDQ4P0lQCCQMGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\n=HYDv\n-----END PGP MESSAGE-----\n",

@@ -351,7 +351,7 @@
       }
     },
     {
-      "name": "native asset without a mapping",
+      "name": "native asset not in the table (ignored)",
       "event": {
         "kind": 1,
         "content": "$HYPE",
@@ -367,12 +367,7 @@
       "embed": {
         "ticker": "HYPE",
         "mode": "compact",
-        "asset": {
-          "form": "native",
-          "caip19": null,
-          "symbol_check": false,
-          "id": "hype:native"
-        }
+        "asset": null
       }
     },
     {

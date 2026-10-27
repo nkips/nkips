@@ -66,7 +66,9 @@ def asset_info(asset, ticker):
     m = SHORT_KIND.match(asset)
     if m:
         if m.group(1) != ticker.lower(): return None             # ticker binding
-        if m.group(2) == "native": return {"form": "native", "caip19": NATIVE.get(m.group(1)), "symbol_check": False}
+        if m.group(2) == "native":
+            if m.group(1) not in NATIVE: return None                # unlisted native id: ignored
+            return {"form": "native", "caip19": NATIVE[m.group(1)], "symbol_check": False}
         return {"form": "equity", "caip19": None, "symbol_check": False}
     m = SHORT_TOKEN.match(asset)
     if not m or m.group(1) != ticker.lower(): return None
