@@ -8,13 +8,22 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC, DIST = ROOT / "nkips", ROOT / "dist"
 CSS = (ROOT / "site" / "style.css").read_text()
 
-def page(title, body, desc, path):
+def page(title, body, desc, path, og="index"):
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="https://nkips.org{path}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="NKIPs">
+<meta property="og:title" content="{html.escape(title)}">
+<meta property="og:description" content="{html.escape(desc)}">
+<meta property="og:url" content="https://nkips.org{path}">
+<meta property="og:image" content="https://nkips.org/og/{og}.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nkips.org/og/{og}.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23f6efd9'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' text-anchor='middle' fill='%232b2418'%3EN%3C/text%3E%3C/svg%3E">
 <style>{CSS}</style></head>
 <body><header class="mast"><a class="brand" href="/">NKIPs</a><nav><a href="/">Proposals</a><a href="/process/">Process</a><a href="https://github.com/nkips/nkips">Source</a></nav></header>
@@ -66,7 +75,7 @@ def build():
 <div class="numbered">{body_html}</div>
 <p class="source"><a href="index.md">Markdown source</a> · <a href="https://github.com/nkips/nkips/blob/main/nkips/{slug}.md">History</a> · <a href="https://github.com/nkips/nkips/issues/new?title={slug}%3A%20">Comment</a></p>
 </article>"""
-        (DIST / slug / "index.html").write_text(page(f"NKIP-{num:04d}: {title}", art, re.sub('<[^>]+>', '', render(lead)[0])[:200], f"/{slug}/"))
+        (DIST / slug / "index.html").write_text(page(f"NKIP-{num:04d}: {title}", art, re.sub('<[^>]+>', '', render(lead)[0])[:200], f"/{slug}/", og=slug))
         rows.append(f'<tr><td class="n"><a href="/{slug}/">{num:04d}</a></td><td><a href="/{slug}/">{html.escape(title)}</a></td><td>{html.escape(meta.get("Type",""))}</td><td><span class="status s-{meta.get("Status","").lower()}">{html.escape(meta.get("Status",""))}</span></td><td>{html.escape(meta.get("Created",""))}</td></tr>')
     index = f"""<section class="hero"><h1>No-KYC Improvement Proposals</h1>
 <p class="lede">Open standards that let users of no-KYC swaps, services and tips check what they were promised, without trusting the operator and without giving up their privacy.</p>
@@ -78,15 +87,16 @@ def build():
 <li><b>Private by construction.</b> Public records hold hashes, never plaintext addresses or amounts.</li>
 <li><b>No gatekeeper.</b> No NKIP requires one company's server; every role can be run by anyone.</li>
 <li><b>No KYC, ever.</b> No NKIP asks either party to identify themselves.</li></ol>"""
-    (DIST / "index.html").write_text(page("NKIPs: No-KYC Improvement Proposals", index, "Open, vendor-neutral standards for verifiable no-KYC swaps and services.", "/"))
+    (DIST / "index.html").write_text(page("NKIPs: No-KYC Improvement Proposals", index, "Open, vendor-neutral standards for verifiable no-KYC swaps, services and tips.", "/"))
     proc_md = (ROOT / "README.md").read_text().split("## Process", 1)[1].split("## Tools", 1)[0]
     (DIST / "process").mkdir()
     (DIST / "process" / "index.html").write_text(page("Process · NKIPs", f'<article class="paper"><h1>Process</h1>{render(proc_md)[0]}<h2>Statuses</h2><table><tr><th>Draft</th><td>Open for comment; anything can change.</td></tr><tr><th>Proposed</th><td>One reference implementation exists.</td></tr><tr><th>Final</th><td>Two independent implementations interoperate. Errata only.</td></tr><tr><th>Withdrawn</th><td>Abandoned by its authors.</td></tr></table></article>', "How NKIPs are proposed, reviewed and finalised.", "/process/"))
     shutil.copy(ROOT / "site" / "404.html", DIST / "404.html")
+    shutil.copytree(ROOT / "site" / "og", DIST / "og")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://nkips.org/sitemap.xml\n")
     urls = ["/", "/process/"] + [f"/{f.stem}/" for f in sorted(SRC.glob('nkip-*.md'))]
     (DIST / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>https://nkips.org{u}</loc></url>" for u in urls) + "</urlset>")
-    (DIST / "_headers").write_text("/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'\n/*.json\n  Access-Control-Allow-Origin: *\n")
+    (DIST / "_headers").write_text("/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'\n/*.json\n  Access-Control-Allow-Origin: *\n")
     print("built", len(urls), "pages")
 
 if __name__ == "__main__": build()
