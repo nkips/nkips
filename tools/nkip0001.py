@@ -182,9 +182,65 @@ def check2(path):
             if open_salt_box(a["salt_box"], wrong) == rec["salt"]: ok = False; print("FAIL salt box opens with a wrong key", c["name"])
     print("OK v2" if ok else "FAILED"); sys.exit(0 if ok else 1)
 
+# --- Recovery key (v2): a fresh secp256k1 key per order, derived from the user's
+# Nostr secret so nothing needs saving. Pure Python secp256k1 (test vectors only).
+_P = 2**256 - 2**32 - 977
+_N = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
+_G = (0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798,
+      0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8)
+
+def _add(a, b):
+    if a is None: return b
+    if b is None: return a
+    if a[0] == b[0] and (a[1] + b[1]) % _P == 0: return None
+    if a == b: l = 3 * a[0] * a[0] * pow(2 * a[1], -1, _P) % _P
+    else: l = (b[1] - a[1]) * pow(b[0] - a[0], -1, _P) % _P
+    x = (l * l - a[0] - b[0]) % _P
+    return (x, (l * (a[0] - x) - a[1]) % _P)
+
+def _mul(k, pt=_G):
+    r = None
+    while k:
+        if k & 1: r = _add(r, pt)
+        pt = _add(pt, pt); k >>= 1
+    return r
+
+def recovery_key(nsec_hex, issuer, payout_address):
+    """sk = (HMAC-SHA256(key=nsec bytes, "nkip01/2 recovery" 0x00 issuer 0x00 payout) mod (n-1)) + 1."""
+    import hmac
+    msg = b"nkip01/2 recovery\x00" + issuer.encode() + b"\x00" + payout_address.encode()
+    h = hmac.new(bytes.fromhex(nsec_hex), msg, hashlib.sha256).digest()
+    sk = int.from_bytes(h, "big") % (_N - 1) + 1
+    return h.hex(), format(sk, "064x"), format(_mul(sk)[0], "064x")
+
+def genrk():
+    # Throwaway Nostr secret: SHA-256("nkip01 test recovery nsec"). Never use it for anything.
+    nsec = hashlib.sha256(b"nkip01 test recovery nsec").hexdigest()
+    cases = [("example.swap", "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh"),
+             ("example.swap", "44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A"),
+             ("other.swap", "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh")]
+    out = []
+    for issuer, payout in cases:
+        h, sk, pk = recovery_key(nsec, issuer, payout)
+        out.append({"issuer": issuer, "payout_address": payout, "hmac": h, "sk": sk, "recovery_pubkey": pk})
+    return {"nsec_hex": nsec, "cases": out}
+
+def checkrk(path):
+    v = json.load(open(path))
+    pks = set()
+    for c in v["cases"]:
+        h, sk, pk = recovery_key(v["nsec_hex"], c["issuer"], c["payout_address"])
+        assert (h, sk, pk) == (c["hmac"], c["sk"], c["recovery_pubkey"]), c
+        assert 1 <= int(sk, 16) < _N
+        pks.add(pk)
+    assert len(pks) == len(v["cases"]), "keys must differ per issuer and payout"
+    print("OK recovery keys")
+
 if __name__ == "__main__":
     if sys.argv[1:2] == ["gen"]: print(json.dumps(gen(), indent=2))
     elif sys.argv[1:2] == ["check"]: check(sys.argv[2])
     elif sys.argv[1:2] == ["gen2"]: print(json.dumps(gen2(), indent=2))
     elif sys.argv[1:2] == ["check2"]: check2(sys.argv[2])
+    elif sys.argv[1:2] == ["genrk"]: print(json.dumps(genrk(), indent=2))
+    elif sys.argv[1:2] == ["checkrk"]: checkrk(sys.argv[2])
     else: print(__doc__)

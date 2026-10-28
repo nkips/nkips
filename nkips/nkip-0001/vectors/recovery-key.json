@@ -1,0 +1,26 @@
+{
+  "nsec_hex": "3a0c7b16cafcfcbef7bdbf60c515aea71cb39ba04e3e79614f56a6bf3b1a5250",
+  "cases": [
+    {
+      "issuer": "example.swap",
+      "payout_address": "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+      "hmac": "7fae1f8333f61cda3efafd692962c12d4b4edd919d5ddb16fca419bcd17489b4",
+      "sk": "7fae1f8333f61cda3efafd692962c12d4b4edd919d5ddb16fca419bcd17489b5",
+      "recovery_pubkey": "8cd4baa45542b737be86d4f4749dd9a8dfacc85050d2e53f6681d460b21c4564"
+    },
+    {
+      "issuer": "example.swap",
+      "payout_address": "44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A",
+      "hmac": "394f52f16896756afe456fc22a8ff561727b06c89630e39bbc539a6fb4b9f8db",
+      "sk": "394f52f16896756afe456fc22a8ff561727b06c89630e39bbc539a6fb4b9f8dc",
+      "recovery_pubkey": "8249d1a4a6abc4b1b7fbad4c23ef67db7c81b84d1dc417441337d5cbfd6823d4"
+    },
+    {
+      "issuer": "other.swap",
+      "payout_address": "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+      "hmac": "e25f37f7d95c907dd3a8b1e96a12078cf7fb97e7a107304a6da17c117c405529",
+      "sk": "e25f37f7d95c907dd3a8b1e96a12078cf7fb97e7a107304a6da17c117c40552a",
+      "recovery_pubkey": "1c11e5d84f769484713289b046276eb620a3e1587318518a76634147aed75247"
+    }
+  ]
+}
